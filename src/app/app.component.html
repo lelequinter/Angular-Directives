@@ -3,12 +3,18 @@
   <div>
     <form #formRef="ngForm" (ngSubmit)="onSubmit()" [formGroup]="form">
       <input [redMaxlength]="10" [redMinMaxValues]="{max: 50, min: 5}" type="text" formControlName="test"  />
-      <button type="submit">onSubmit</button>
+
+      <button type="submit" [RyUnableClick]="form.get('check')?.value">onSubmit</button>
+      <div style="display: flex;">
+        <input type="checkbox" formControlName="check"> <p>Disable click!</p>
+        <!-- {{ form.get('check')?.value }} -->
+      </div>
     </form>
     <pre>
       {{form.get('test')?.errors | json}}
       <br>
       {{formRef.submitted}}
     </pre>
+    <button type="button" (click)="logForm(form)">enviar control</button>
   </div>
 </div>
