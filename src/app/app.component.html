@@ -1,12 +1,27 @@
-<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  "
+>
   <h1>Prueba de expresiones regulares</h1>
   <div>
     <form #formRef="ngForm" (ngSubmit)="onSubmit()" [formGroup]="form">
-      <input [redMaxlength]="10" [redMinMaxValues]="{max: 50, min: 5}" type="text" formControlName="test"  />
+      <input
+        [redMaxlength]="10"
+        [redMinMaxValues]="{ max: 50, min: 5 }"
+        type="text"
+        formControlName="test"
+      />
 
-      <button type="submit" [RyUnableClick]="form.get('check')?.value">onSubmit</button>
-      <div style="display: flex;">
-        <input type="checkbox" formControlName="check"> <p>Disable click!</p>
+      <button type="submit" [RyUnableClick]="form.get('check')?.value">
+        onSubmit
+      </button>
+      <div style="display: flex">
+        <input type="checkbox" formControlName="check" />
+        <p>Disable click!</p>
         <!-- {{ form.get('check')?.value }} -->
       </div>
     </form>
@@ -16,5 +31,36 @@
       {{formRef.submitted}}
     </pre>
     <button type="button" (click)="logForm(form)">enviar control</button>
+  </div>
+  <br />
+  <div style="display: flex;">
+    <button (click)="pushMethod()">Push Form Data</button>
+    <button type="button" (click)="collapseAnimation(bool, 'content'); bool = !bool">
+      Collapse
+    </button>
+  </div>
+  <br />
+
+  <div id="content" class="ry-collapse">
+    <div
+      *ngFor="let item of formList$.value; index as i"
+      class="ry-collapse-item-wrapper"
+      [id]="'item-content-' + i"
+      >
+      <div
+      class="ry-collapse-item"
+      [style]="i !== 0 ? 'padding-bottom: 30px' : 'padding-bottom: 0'"
+      >
+      <div class="ry-collapse-card">
+        <p style="margin-top: 0">test: {{ item.test }}</p>
+        <button (click)="deleteItem(i, 'item-content-' + i)">
+          Delete Item
+        </button>
+        <p>check: {{ item.check }}</p>
+        <p>name: {{ item.name }}</p>
+        <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
