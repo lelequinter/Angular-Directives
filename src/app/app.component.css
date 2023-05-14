@@ -1,5 +1,7 @@
 .ry-collapse {
-  /* background-color: aquamarine; */
+  /* display: flex;
+  flex-direction: column;
+  gap: 10px; */
   max-height: 0;
   overflow: hidden;
   transition: 0.5s ease-in-out;
@@ -15,6 +17,7 @@
 
 .ry-collapse-item {
   padding: 30px 30px 30px 30px;
+  /* margin: 30px 30px 30px 30px; */
 }
 
 .ry-collapse-card {
@@ -25,4 +28,56 @@
   -webkit-box-shadow: 0px 0px 39px -10px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 39px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 39px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* the Other way >>>>>>>>>>>>>>>>>>*/
+.ry-collapse-2{
+  /* gap: 30px; */
+  min-height: 0;
+}
+.expandable-wrapper{
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows .5s;
+}
+
+.expandable-wrapper.open{
+  grid-template-rows: 1fr;
+}
+
+.ry-collapse-item-2{
+  margin: 30px;
+  overflow: hidden;
+  background-color: aquamarine;
+  border: 1px dotted rgba(0, 0, 0, 0.75);
+}
+
+/* 3ra opcion >>>>>>>>>>>>>>>>>>*/
+
+.ry-expandable{
+  max-height: 0;
+  overflow: hidden;
+  transition: 500ms ease-in-out;
+  animation-fill-mode: both;
+  background-color: aquamarine;
+  /* display: flex;
+  gap: 20px;
+  flex-direction: column; */
+}
+
+.ry-expandable-item{
+  opacity: 1;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px dotted red;
+
+  max-height: 250px;
+  overflow: hidden;
+  transition: 500ms ease-in-out;
+  animation-fill-mode: both;
+  -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
 }

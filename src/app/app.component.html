@@ -33,15 +33,18 @@
     <button type="button" (click)="logForm(form)">enviar control</button>
   </div>
   <br />
-  <div style="display: flex;">
+  <div style="display: flex">
     <button (click)="pushMethod()">Push Form Data</button>
-    <button type="button" (click)="collapseAnimation(bool, 'content'); bool = !bool">
+    <button
+      type="button"
+      (click)="collapseAnimation(bool, 'content'); bool = !bool"
+    >
       Collapse
     </button>
   </div>
   <br />
 
-  <div id="content" class="ry-collapse">
+  <!-- <div id="content" class="ry-collapse">
     <div
       *ngFor="let item of formList$.value; index as i"
       class="ry-collapse-item-wrapper"
@@ -49,7 +52,6 @@
       >
       <div
       class="ry-collapse-item"
-      [style]="i !== 0 ? 'padding-bottom: 30px' : 'padding-bottom: 0'"
       >
       <div class="ry-collapse-card">
         <p style="margin-top: 0">test: {{ item.test }}</p>
@@ -62,5 +64,42 @@
       </div>
       </div>
     </div>
+  </div> -->
+
+  <div id="content" class="ry-expandable">
+    <div
+      *ngFor="let item of formList$.value; index as i"
+      class="ry-expandable-item"
+      [id]="'item-content-' + i"
+      >
+        <p style="margin-top: 0">test: {{ item.test }}</p>
+        <button (click)="deleteItem(i, 'item-content-')">
+          Delete Item
+        </button>
+        <p>check: {{ item.check }}</p>
+        <p>name: {{ item.name }}</p>
+        <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
+    </div>
   </div>
+
+  <!-- <hr style="width: 100%" />
+  <button type="button" (click)="bool = !bool">Collapse</button>
+  <div class="expandable-wrapper" [ngClass]=" bool ? 'open' : ''">
+    <div class="ry-collapse-2">
+      <div
+        *ngFor="let item of formList$.value; index as i"
+        class="ry-collapse-item-2"
+        [id]="'item-content-' + i"
+      >
+        <p style="margin-top: 0">test: {{ item.test }}</p>
+        <button (click)="deleteItem(i, 'item-content-' + i)">
+          Delete Item
+        </button>
+        <p>check: {{ item.check }}</p>
+        <p>name: {{ item.name }}</p>
+        <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
+      </div>
+    </div>
+  </div> -->
+
 </div>

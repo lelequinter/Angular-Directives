@@ -101,8 +101,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     setTimeout(() => {
       Array.from(children).forEach((item: Element) => {
-        contentHeight += item.clientHeight;
-
+        contentHeight += item.clientHeight + 30;
       });
       contentHeight += 20;
       if (value) {
@@ -115,16 +114,29 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   deleteItem(index: number, elementId: string) {
     const cloneArray = _.cloneDeep(this.formList$.value);
-    this.deleteItemAnimation(false, elementId);
+    this.deleteItemAnimation(index,elementId);
     setTimeout(() => {
       cloneArray.splice(index, 1);
       this.formList$.next(cloneArray);
     }, 500);
   }
 
-  deleteItemAnimation(value: boolean, elementId: string) {
-    const element: HTMLElement | null = document.getElementById(elementId);
+  deleteItemAnimation(index: number, elementId: string) {
+    const mainElement: HTMLElement | null = document.getElementById(`${elementId}${index}`);
+    mainElement?.style.setProperty('max-height', '0');
+    mainElement?.style.setProperty('padding-top', '0');
+    mainElement?.style.setProperty('padding-bottom', '0');
+    mainElement?.style.setProperty('border', '0px dotted red');
+    mainElement?.style.setProperty('margin-top', '0');
+    mainElement?.style.setProperty('margin-bottom', '0');
+    setTimeout(() => {
+      mainElement?.style.setProperty('opacity', '0');
+    }, 200);
 
-    element?.style.setProperty('max-height', '0');
+    if( this.formList$.value.length !== index+1){
+      const nextElement: HTMLElement | null = document.getElementById(`${elementId}${index-1}`);
+      nextElement?.style.setProperty('margin-bottom', '0');
+    }
+
   }
 }
