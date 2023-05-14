@@ -72,6 +72,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     console.log('control >>', control);
   }
 
+  formList$ = new BehaviorSubject<any[]>([]);
+
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.formList$.subscribe((_) => {
       this.expandableAnimation(true, 'content');
@@ -83,7 +85,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   formList: any[] = [];
-  formList$ = new BehaviorSubject<any[]>([]);
   memoryFormList: any[] = [];
 
   bool: boolean = false;
@@ -93,22 +94,24 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   expandableAnimation(value: boolean, elementId: string) {
-    let contentHeight = 0;
-    const animationDelay = 0;
-    const element: HTMLElement | null = document.getElementById(elementId);
-
-    const children: HTMLCollection | never[] = document.getElementById(elementId)?.children || [];
+    let contentHeight = 0; //* Expandable wrapper height
+    const animationDelay = 0; //* Expandable animation delay (it must to be greater or equal to zero)
+    const element: HTMLElement | null = document.getElementById(elementId); //* Expandable wrapper element
+    const children: HTMLCollection | never[] = document.getElementById(elementId)?.children || []; //* Expandable wrapper children
+    const expandableItemMargin = 20;  //* Margin between expandable items
+    const expandableItemBorder = 2;   //* Sum of top and bottom border width
 
     setTimeout(() => {
       Array.from(children).forEach((item: Element) => {
-        //TODO: Calcular apropiadamente cuanto mas se debe agregar
-        const expandableItemMargin = 20;
-        contentHeight += item.clientHeight + (expandableItemMargin * 2);
+        //* Calculating new expandable wrapper height
+        contentHeight += item.clientHeight + expandableItemBorder;
       });
-      contentHeight += 20;
+
       if (value) {
-        element?.style.setProperty('max-height', `${contentHeight}px`);
+        //* Setting the height of the expandable wrapper depending on its content if value is TRUE
+        element?.style.setProperty('max-height', `${contentHeight + ( expandableItemMargin * (children.length + 1) )}px`);
       } else {
+        //* Setting the height of the expandable wrapper to ZERO if value is FALSE
         element?.style.setProperty('max-height', '0');
       }
     }, animationDelay);
@@ -139,8 +142,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
 
     if( index !== 0){
-      const nextElement: HTMLElement | null = document.getElementById(`${elementId}${index-1}`);
-      nextElement?.style.setProperty('margin-bottom', '0');
+      const previousElement: HTMLElement | null = document.getElementById(`${elementId}${index-1}`);
+      previousElement?.style.setProperty('margin-bottom', '0');
     }
   }
 }
