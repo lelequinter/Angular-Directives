@@ -37,43 +37,21 @@
     <button (click)="pushMethod()">Push Form Data</button>
     <button
       type="button"
-      (click)="collapseAnimation(bool, 'content'); bool = !bool"
+      (click)="expandableAnimation(bool, 'content'); bool = !bool"
     >
       Collapse
     </button>
   </div>
   <br />
 
-  <!-- <div id="content" class="ry-collapse">
-    <div
-      *ngFor="let item of formList$.value; index as i"
-      class="ry-collapse-item-wrapper"
-      [id]="'item-content-' + i"
-      >
-      <div
-      class="ry-collapse-item"
-      >
-      <div class="ry-collapse-card">
-        <p style="margin-top: 0">test: {{ item.test }}</p>
-        <button (click)="deleteItem(i, 'item-content-' + i)">
-          Delete Item
-        </button>
-        <p>check: {{ item.check }}</p>
-        <p>name: {{ item.name }}</p>
-        <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
-      </div>
-      </div>
-    </div>
-  </div> -->
-
   <div id="content" class="ry-expandable">
     <div
       *ngFor="let item of formList$.value; index as i"
       class="ry-expandable-item"
-      [id]="'item-content-' + i"
+      [id]="'item-content' + i"
       >
         <p style="margin-top: 0">test: {{ item.test }}</p>
-        <button (click)="deleteItem(i, 'item-content-')">
+        <button (click)="deleteItem('item-content',i)">
           Delete Item
         </button>
         <p>check: {{ item.check }}</p>
@@ -81,25 +59,5 @@
         <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
     </div>
   </div>
-
-  <!-- <hr style="width: 100%" />
-  <button type="button" (click)="bool = !bool">Collapse</button>
-  <div class="expandable-wrapper" [ngClass]=" bool ? 'open' : ''">
-    <div class="ry-collapse-2">
-      <div
-        *ngFor="let item of formList$.value; index as i"
-        class="ry-collapse-item-2"
-        [id]="'item-content-' + i"
-      >
-        <p style="margin-top: 0">test: {{ item.test }}</p>
-        <button (click)="deleteItem(i, 'item-content-' + i)">
-          Delete Item
-        </button>
-        <p>check: {{ item.check }}</p>
-        <p>name: {{ item.name }}</p>
-        <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
-      </div>
-    </div>
-  </div> -->
 
 </div>

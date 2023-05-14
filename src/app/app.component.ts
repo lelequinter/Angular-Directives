@@ -74,7 +74,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.formList$.subscribe((_) => {
-      this.collapseAnimation(true, 'content');
+      this.expandableAnimation(true, 'content');
     });
   }
 
@@ -92,7 +92,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.formList$.next([...this.formList$.value, this.form.value]);
   }
 
-  collapseAnimation(value: boolean, elementId: string) {
+  expandableAnimation(value: boolean, elementId: string) {
     let contentHeight = 0;
     const animationDelay = 0;
     const element: HTMLElement | null = document.getElementById(elementId);
@@ -101,7 +101,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     setTimeout(() => {
       Array.from(children).forEach((item: Element) => {
-        contentHeight += item.clientHeight + 30;
+        const expandableItemMargin = 20;
+        contentHeight += item.clientHeight + (expandableItemMargin * 2);
       });
       contentHeight += 20;
       if (value) {
@@ -112,21 +113,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }, animationDelay);
   }
 
-  deleteItem(index: number, elementId: string) {
+  deleteItem(elementId: string,index: number) {
     const cloneArray = _.cloneDeep(this.formList$.value);
-    this.deleteItemAnimation(index,elementId);
+    this.deleteItemAnimation(elementId,index);
     setTimeout(() => {
       cloneArray.splice(index, 1);
       this.formList$.next(cloneArray);
     }, 500);
   }
 
-  deleteItemAnimation(index: number, elementId: string) {
+  deleteItemAnimation(elementId: string,index: number) {
     const mainElement: HTMLElement | null = document.getElementById(`${elementId}${index}`);
     mainElement?.style.setProperty('max-height', '0');
     mainElement?.style.setProperty('padding-top', '0');
     mainElement?.style.setProperty('padding-bottom', '0');
-    mainElement?.style.setProperty('border', '0px dotted red');
+    mainElement?.style.setProperty('border', '0px dotted #757575');
     mainElement?.style.setProperty('margin-top', '0');
     mainElement?.style.setProperty('margin-bottom', '0');
     setTimeout(() => {
@@ -137,6 +138,5 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       const nextElement: HTMLElement | null = document.getElementById(`${elementId}${index-1}`);
       nextElement?.style.setProperty('margin-bottom', '0');
     }
-
   }
 }
