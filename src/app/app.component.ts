@@ -101,6 +101,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     setTimeout(() => {
       Array.from(children).forEach((item: Element) => {
+        //TODO: Calcular apropiadamente cuanto mas se debe agregar
         const expandableItemMargin = 20;
         contentHeight += item.clientHeight + (expandableItemMargin * 2);
       });
@@ -129,12 +130,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     mainElement?.style.setProperty('padding-bottom', '0');
     mainElement?.style.setProperty('border', '0px dotted #757575');
     mainElement?.style.setProperty('margin-top', '0');
-    mainElement?.style.setProperty('margin-bottom', '0');
     setTimeout(() => {
       mainElement?.style.setProperty('opacity', '0');
     }, 200);
 
-    if( this.formList$.value.length !== index+1){
+    if(index == 0){
+      mainElement?.style.setProperty('margin-bottom', '0');
+    }
+
+    if( index !== 0){
       const nextElement: HTMLElement | null = document.getElementById(`${elementId}${index-1}`);
       nextElement?.style.setProperty('margin-bottom', '0');
     }
