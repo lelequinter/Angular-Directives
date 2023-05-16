@@ -34,8 +34,12 @@
   </div>
   <br />
   <div style="display: flex">
-    <button (click)="pushMethod()">Push Form Data</button>
     <button
+      tabindex="-1"
+      (click)="pushMethod()">Push Form Data
+    </button>
+    <button
+      tabindex="-1"
       type="button"
       (click)="expandableAnimation(bool, 'content'); bool = !bool"
     >

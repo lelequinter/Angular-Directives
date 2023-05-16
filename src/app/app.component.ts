@@ -72,7 +72,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     console.log('control >>', control);
   }
 
+  bool: boolean = false;
+
   formList$ = new BehaviorSubject<any[]>([]);
+  animationTransition: boolean = false;
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.formList$.subscribe((_) => {
@@ -84,22 +87,35 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.formList$.unsubscribe();
   }
 
-  formList: any[] = [];
-  memoryFormList: any[] = [];
-
-  bool: boolean = false;
-
   pushMethod() {
-    this.formList$.next([...this.formList$.value, this.form.value]);
+    if(!this.animationTransition) {
+      this.formList$.next([...this.formList$.value, this.form.value]);
+    }
+  }
+
+  deleteItem(elementId: string, index: number) {
+    this.animationTransition = true;
+    const cloneArray = _.cloneDeep(this.formList$.value);
+    this.deleteItemAnimation(elementId,index);
+    setTimeout(() => {
+      cloneArray.splice(index, 1);
+      this.formList$.next(cloneArray);
+    }, 500);
   }
 
   expandableAnimation(value: boolean, elementId: string) {
     let contentHeight = 0; //* Expandable wrapper height
     const animationDelay = 0; //* Expandable animation delay (it must to be greater or equal to zero)
     const element: HTMLElement | null = document.getElementById(elementId); //* Expandable wrapper element
-    const children: HTMLCollection | never[] = document.getElementById(elementId)?.children || []; //* Expandable wrapper children
+    const children: HTMLCollection | never[] = element?.children || []; //* Expandable wrapper children
     const expandableItemMargin = 20;  //* Margin between expandable items
     const expandableItemBorder = 2;   //* Sum of top and bottom border width
+
+    //* If this method is called when delete an item then set instantly maxHeight
+    this.animationTransition
+    ? element?.style.setProperty('transition', '0ms ease-in-out')
+    : element?.style.setProperty('transition', '500ms ease-in-out');
+    this.animationTransition = false;
 
     setTimeout(() => {
       Array.from(children).forEach((item: Element) => {
@@ -115,15 +131,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         element?.style.setProperty('max-height', '0');
       }
     }, animationDelay);
-  }
-
-  deleteItem(elementId: string,index: number) {
-    const cloneArray = _.cloneDeep(this.formList$.value);
-    this.deleteItemAnimation(elementId,index);
-    setTimeout(() => {
-      cloneArray.splice(index, 1);
-      this.formList$.next(cloneArray);
-    }, 500);
   }
 
   deleteItemAnimation(elementId: string,index: number) {
