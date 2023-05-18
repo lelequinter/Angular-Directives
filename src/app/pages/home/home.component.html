@@ -1,4 +1,4 @@
-<!-- <div
+<div
   style="
     display: flex;
     justify-content: center;
@@ -8,14 +8,13 @@
 >
   <h1>Prueba de expresiones regulares</h1>
   <div>
-    <form #formRef="ngForm" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <form #formRef="ngForm" (ngSubmit)="onSubmit()"  [formGroup]="form">
       <input
-        [redMaxlength]="10"
-        [redMinMaxValues]="{ max: 50, min: 5 }"
+      [redMaxlength]="10"
+      [redMinMaxValues]="{ max: 50, min: 5 }"
         type="text"
         formControlName="test"
       />
-
       <button type="submit" [RyUnableClick]="form.get('check')?.value">
         onSubmit
       </button>
@@ -62,11 +61,4 @@
         <p style="margin-bottom: 0">apellido: {{ item.apellido }}</p>
     </div>
   </div>
-</div> -->
-<nav>
-  <ul style="display: flex; gap: 30px;">
-    <li routerLink="/home">Home</li>
-    <li routerLink="/expandible-view">expandible-view</li>
-  </ul>
-</nav>
-<router-outlet></router-outlet>
+</div>
