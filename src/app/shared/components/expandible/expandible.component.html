@@ -1,0 +1,13 @@
+<div [id]="contentName" class="ry-expandable-wrapper">
+  <div
+    *ngFor="let item of array$.value; index as i"
+    class="ry-expandable-item"
+    [id]="contentName + 'item' + i"
+    >
+      <p style="margin-top: 0">Nombre: {{ item.nombre }}</p>
+      <p>color: {{ item.color }}</p>
+      <button (click)="deleteItem(contentName + 'item',i)">
+        Delete Item
+      </button>
+  </div>
+</div>

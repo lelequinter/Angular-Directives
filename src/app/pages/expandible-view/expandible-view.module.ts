@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ExpandibleViewRoutingModule } from './expandible-view-routing.module';
 import { ExpandibleViewComponent } from './expandible-view.component';
+import { ExpandibleModule } from 'src/app/shared/components/expandible/expandible.module';
 
 
 
@@ -12,7 +13,8 @@ import { ExpandibleViewComponent } from './expandible-view.component';
   ],
   imports: [
     CommonModule,
-    ExpandibleViewRoutingModule
+    ExpandibleViewRoutingModule,
+    ExpandibleModule
   ],
 })
 export class ExpandibleViewModule { }

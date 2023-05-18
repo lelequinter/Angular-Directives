@@ -1,2 +1,11 @@
-<p>expandible-view works!</p>
-<!-- <router-outlet></router-outlet> -->
+
+<div class="row">
+  <div class="col">
+    <h2>Expandible: carsList$</h2> <button (click)="pushCar()">Push carsList$</button>
+    <app-expandible #carsExpandible [array$]="carsList$" contentName="Carros"></app-expandible>
+  </div>
+  <div class="col">
+    <h2>Expandible: animalsList$</h2> <button (click)="pushAnimal()">Push animalsList$</button>
+    <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales"></app-expandible>
+  </div>
+</div>
