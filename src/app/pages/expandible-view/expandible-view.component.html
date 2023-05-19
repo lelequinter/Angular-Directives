@@ -4,8 +4,7 @@
     <h2>Expandible: carsList$</h2> <button (click)="pushCar()">Push carsList$</button>
     <app-expandible #carsExpandible [array$]="carsList$" contentName="Carros">
       <ng-template let-implicit>
-        <!-- TODO: Agregar maquetacion de cars -->
-        <td>{{implicit.item.nombre}} {{implicit.i}}</td>
+        <app-car-card [data]="implicit.item" [index]="implicit.index"></app-car-card>
     </ng-template>
     </app-expandible>
   </div>
@@ -13,8 +12,7 @@
     <h2>Expandible: animalsList$</h2> <button (click)="pushAnimal()">Push animalsList$</button>
     <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales">
       <ng-template let-implicit>
-        <!-- TODO: Agregar maquetacion de animals -->
-        <td>{{implicit.item.nombre}} {{implicit.i}}</td>
+        <app-animal-card [data]="implicit.item" [index]="implicit.index"></app-animal-card>
     </ng-template>
     </app-expandible>
   </div>

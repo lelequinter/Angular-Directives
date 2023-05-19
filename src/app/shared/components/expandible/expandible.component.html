@@ -1,8 +1,8 @@
 <div [id]="contentName" class="ry-expandable-wrapper">
   <div
-    *ngFor="let item of array$.value; index as i"
+    *ngFor="let item of array$.value; index as index"
     class="ry-expandable-item"
-    [id]="contentName + 'item' + i"
+    [id]="contentName + 'item' + index"
   >
     <!-- <p style="margin-top: 0">Nombre: {{ item.nombre }}</p>
       <p>color: {{ item.color }}</p>
@@ -11,7 +11,7 @@
       </button> -->
     <ng-template
       [ngTemplateOutlet]="templateRef"
-      [ngTemplateOutletContext]="{ $implicit: {item, i} }"
+      [ngTemplateOutletContext]="{ $implicit: {item, index} }"
     ></ng-template>
   </div>
 </div>
