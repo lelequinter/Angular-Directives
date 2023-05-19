@@ -3,11 +3,15 @@
     *ngFor="let item of array$.value; index as i"
     class="ry-expandable-item"
     [id]="contentName + 'item' + i"
-    >
-      <p style="margin-top: 0">Nombre: {{ item.nombre }}</p>
+  >
+    <!-- <p style="margin-top: 0">Nombre: {{ item.nombre }}</p>
       <p>color: {{ item.color }}</p>
       <button (click)="deleteItem(contentName + 'item',i)">
         Delete Item
-      </button>
+      </button> -->
+    <ng-template
+      [ngTemplateOutlet]="templateRef"
+      [ngTemplateOutletContext]="{ $implicit: {item, i} }"
+    ></ng-template>
   </div>
 </div>

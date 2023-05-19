@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,6 +8,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./expandible.component.css']
 })
 export class ExpandibleComponent {
+  @ContentChild(TemplateRef) templateRef!: TemplateRef<any>;
+
   @Input() array$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   @Input() contentName!: string;
 

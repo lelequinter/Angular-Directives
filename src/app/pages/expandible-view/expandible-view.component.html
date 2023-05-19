@@ -2,10 +2,20 @@
 <div class="row">
   <div class="col">
     <h2>Expandible: carsList$</h2> <button (click)="pushCar()">Push carsList$</button>
-    <app-expandible #carsExpandible [array$]="carsList$" contentName="Carros"></app-expandible>
+    <app-expandible #carsExpandible [array$]="carsList$" contentName="Carros">
+      <ng-template let-implicit>
+        <!-- TODO: Agregar maquetacion de cars -->
+        <td>{{implicit.item.nombre}} {{implicit.i}}</td>
+    </ng-template>
+    </app-expandible>
   </div>
   <div class="col">
     <h2>Expandible: animalsList$</h2> <button (click)="pushAnimal()">Push animalsList$</button>
-    <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales"></app-expandible>
+    <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales">
+      <ng-template let-implicit>
+        <!-- TODO: Agregar maquetacion de animals -->
+        <td>{{implicit.item.nombre}} {{implicit.i}}</td>
+    </ng-template>
+    </app-expandible>
   </div>
 </div>
