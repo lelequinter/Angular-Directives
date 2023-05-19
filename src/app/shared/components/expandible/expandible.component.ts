@@ -30,8 +30,8 @@ export class ExpandibleComponent {
   pushMethod(data: any) {
     if(!this.animationTransition) {
       this.array$.next([...this.array$.value, data]);
+      this.expandableAnimation(true, this.contentName);
     }
-    this.expandableAnimation(true, this.contentName);
   }
 
   deleteItem(elementId: string, index: number) {
