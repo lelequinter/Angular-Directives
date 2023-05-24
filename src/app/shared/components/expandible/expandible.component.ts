@@ -19,12 +19,6 @@ export class ExpandibleComponent {
     console.log('Called : ' + this.contentName);
   }
 
-  constructor() {
-    // this.array$.subscribe((_) => {
-    //   this.expandableAnimation(true, this.contentName);
-    // });
-  }
-
   ngOnDestroy(): void {
     this.array$.unsubscribe();
   }

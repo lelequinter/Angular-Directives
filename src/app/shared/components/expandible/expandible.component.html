@@ -4,11 +4,6 @@
     class="ry-expandable-item"
     [id]="contentName + 'item' + index"
   >
-    <!-- <p style="margin-top: 0">Nombre: {{ item.nombre }}</p>
-      <p>color: {{ item.color }}</p>
-      <button (click)="deleteItem(contentName + 'item',i)">
-        Delete Item
-      </button> -->
     <ng-template
       [ngTemplateOutlet]="templateRef"
       [ngTemplateOutletContext]="{ $implicit: {item, index} }"
