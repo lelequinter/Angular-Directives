@@ -17,7 +17,7 @@
     <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales">
       <ng-template let-implicit>
         <app-animal-card
-          data]="implicit.item"
+          [data]="implicit.item"
           [index]="implicit.index"
           (deleteItem)="deleteAnimal($event)">
         </app-animal-card>
