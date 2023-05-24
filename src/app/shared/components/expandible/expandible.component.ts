@@ -37,7 +37,7 @@ export class ExpandibleComponent {
   }
 
   deleteItem(index: number) {
-    const elementId = this.contentName + 'item' + index
+    const elementId = this.contentName + 'item';
     this.animationTransition = true;
     const cloneArray = _.cloneDeep(this.array$.value);
     this.deleteItemAnimation(elementId,index);
@@ -79,7 +79,7 @@ export class ExpandibleComponent {
   }
 
   deleteItemAnimation(elementId: string,index: number) {
-    const mainElement: HTMLElement | null = document.getElementById(`${elementId}`);
+    const mainElement: HTMLElement | null = document.getElementById(`${elementId}${index}`);
     mainElement?.style.setProperty('max-height', '0');
     mainElement?.style.setProperty('padding-top', '0');
     mainElement?.style.setProperty('padding-bottom', '0');
