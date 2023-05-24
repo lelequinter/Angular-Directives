@@ -36,7 +36,8 @@ export class ExpandibleComponent {
     }
   }
 
-  deleteItem(elementId: string, index: number) {
+  deleteItem(index: number) {
+    const elementId = this.contentName + 'item' + index
     this.animationTransition = true;
     const cloneArray = _.cloneDeep(this.array$.value);
     this.deleteItemAnimation(elementId,index);

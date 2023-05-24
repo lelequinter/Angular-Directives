@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-car-card',
@@ -8,5 +8,9 @@ import { Component, Input } from '@angular/core';
 export class CarCardComponent {
   @Input() data!: any;
   @Input() index!: number;
+  @Output() deleteItem: EventEmitter<number> = new EventEmitter<number>();
 
+  deleteMethod(index: number){
+    this.deleteItem.emit(index);
+  }
 }

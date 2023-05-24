@@ -1,0 +1,55 @@
+.wrapper{
+  /* padding: 10px; */
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.row{
+  display: flex;
+}
+
+.col{
+  flex: 50%
+}
+
+.car-image{
+  width: 100%;
+}
+
+.image-col{
+  background-image: url('./../../../../assets/imgs/audi_img.jpg');
+  background-size: cover;
+  height: 150px;
+}
+
+.description-col{
+  padding: 10px 5px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: aliceblue;
+  gap: 8px;
+}
+
+p{
+  margin: 0;
+}
+
+.delete-btn{
+  background-color: rgb(228, 13, 13);
+  border: 0;
+  color: white;
+  font-weight: bold;
+  border-radius: 0 0 10px 0;
+  padding: 5px 8px;
+}
+
+.delete-btn:hover{
+  cursor: pointer;
+}
+
+.delete-btn:active{
+  background-color: rgb(238, 70, 70);
+}

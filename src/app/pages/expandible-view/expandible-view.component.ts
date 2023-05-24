@@ -16,7 +16,11 @@ export class ExpandibleViewComponent implements OnDestroy {
 
   pushCar() {
     this.carsExpandible.callMe();
-    this.carsExpandible.pushMethod({nombre: 'Audi R8', color: 'Blanco'})
+    this.carsExpandible.pushMethod({nombre: 'Audi R8', color: 'Blanco', anio: 2022, motor: 'V8 Twin Turbo', precio: '120K USD'})
+  }
+
+  deleteCar(index: number){
+    this.carsExpandible.deleteItem(index)
   }
 
   pushAnimal() {

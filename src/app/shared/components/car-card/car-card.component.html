@@ -1,3 +1,14 @@
-<div>
-  <pre>{{data | json}} {{index}}</pre>
+<div class="wrapper">
+  <div class="row">
+    <div class="col image-col">
+      <button class="delete-btn" (click)="deleteMethod(index)">X</button>
+    </div>
+    <div class="col description-col">
+      <p>Nombre: {{data.nombre}}</p>
+      <p>Color: {{data.color}}</p>
+      <p>Año: {{data.anio}}</p>
+      <p>Motor: {{data.motor}}</p>
+      <p>Precio: {{data.precio}}</p>
+    </div>
+  </div>
 </div>
