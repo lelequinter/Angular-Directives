@@ -1,4 +1,12 @@
-<div>
-  <pre>{{data | json}}</pre>
-  <div style="cursor: pointer;" (click)="deleteMethod(index)" >{{index}}</div>
+<div class="wrapper">
+  <div class="gradient">
+    <div (click)="deleteMethod(index)" class="delete-btn">X</div>
+    <div class="content" style="cursor: pointer;">
+      <h1>
+        {{data.nombre}}
+      </h1>
+      <p>Color: {{data.color}} Edad: {{data.edad}}</p>
+      <p>Hábitat: {{data.habitat}}</p>
+    </div>
+  </div>
 </div>

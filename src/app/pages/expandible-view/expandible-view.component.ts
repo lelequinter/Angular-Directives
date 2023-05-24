@@ -25,7 +25,7 @@ export class ExpandibleViewComponent implements OnDestroy {
 
   pushAnimal() {
     this.animalsExpandible.callMe();
-    this.animalsExpandible.pushMethod({nombre: 'Perro', color: 'Negro'})
+    this.animalsExpandible.pushMethod({nombre: 'Lobo', color: 'Gris', edad: '5 años', habitat: 'Planicies, desiertos, tundras, taigas y bosques.'})
   }
 
   deleteAnimal(index: number){
