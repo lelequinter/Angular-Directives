@@ -12,7 +12,7 @@
     <h2>Expandible: animalsList$</h2> <button (click)="pushAnimal()">Push animalsList$</button>
     <app-expandible #animalsExpandible [array$]="animalsList$" contentName="Animales">
       <ng-template let-implicit>
-        <app-animal-card [data]="implicit.item" [index]="implicit.index"></app-animal-card>
+        <app-animal-card [data]="implicit.item" [index]="implicit.index" (deleteItem)="deleteAnimal($event)"></app-animal-card>
     </ng-template>
     </app-expandible>
   </div>

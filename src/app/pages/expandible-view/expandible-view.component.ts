@@ -28,6 +28,10 @@ export class ExpandibleViewComponent implements OnDestroy {
     this.animalsExpandible.pushMethod({nombre: 'Perro', color: 'Negro'})
   }
 
+  deleteAnimal(index: number){
+    this.animalsExpandible.deleteItem(index)
+  }
+
   ngOnDestroy(): void {
     this.carsList$.unsubscribe()
     this.animalsList$.unsubscribe()

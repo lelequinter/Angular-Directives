@@ -79,7 +79,7 @@ export class ExpandibleComponent {
   }
 
   deleteItemAnimation(elementId: string,index: number) {
-    const mainElement: HTMLElement | null = document.getElementById(`${elementId}${index}`);
+    const mainElement: HTMLElement | null = document.getElementById(`${elementId}`);
     mainElement?.style.setProperty('max-height', '0');
     mainElement?.style.setProperty('padding-top', '0');
     mainElement?.style.setProperty('padding-bottom', '0');
