@@ -1,1 +1,22 @@
-<p>text-to-speech works!</p>
+<div class="wrapper">
+  <h1>Text-to-speech!</h1>
+
+  <div class="text-wrapper">
+    <span *ngFor="let word of textSplitted" (click)="speechText(word)">{{word}}</span>
+  </div>
+
+  <div class="speech-options" style="margin-top: 20px">
+    <button class="speech-btn" (click)="speechText(text)">Speech!</button>
+
+    <select name="voices" id="voices" [value]="3">
+      <option
+        for="voices"
+        *ngFor="let voice of voices; index as i"
+        [value]="i"
+        [selected]="i == 3"
+      >
+        {{ voice.lang }}
+      </option>
+    </select>
+  </div>
+</div>
