@@ -6,6 +6,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdn.wompi.co/libs/js/v1.js" data-public-key="">
+    $wompi.initialize(function ( data, error ) {
+      if ( error === null ) {
+      var sessionId = data.sessionId;
+      // `sessionId` current un string, por ejemplo: "1289_1696830983722-ab493d40c02e-278bab34-323va3"
+      }
+    })
+  </script>
 </head>
 <body>
   <app-root></app-root>

@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'text-to-speech',
    loadChildren: () => import('./pages/text-to-speech/text-to-speech.module').then(m=> m.TextToSpeechModule)
   },
+  {
+    path: 'wompi',
+   loadChildren: () => import('./pages/wompi/wompi.module').then(m=> m.WompiModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home'},
 ];
