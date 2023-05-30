@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <h2>Resumen de la transacción</h2>
+
+  <div class="mx-auto">
+    <h3>Información de la transacción</h3>
+    <h4> {{ transactionStatus() }} </h4>
+    <p>Valor de la transacción:</p>
+    <p>{{ validateAmount() | currency:'COP $':'symbol':'1.0'}}</p>
+    <p>Transacción #: {{ transactionData.id }}</p>
+    <p>Referencia: {{ transactionData.reference }}</p>
+    <p>Pago efectuado con:</p>
+    <div style="display: flex; justify-content: center;">
+      <img src="https://transaction-redirect.wompi.co/2752e8bc402be2cd5a53578cee2b8a1a.svg">
+    </div>
+    <p>{{ transactionData.payment_method_type }}</p>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+    <button (click)="redirectToCart()">Ir al carrito</button>
+    <button (click)="redirectToHome()">Ir al inicio</button>
+  </div>
+</div>
+

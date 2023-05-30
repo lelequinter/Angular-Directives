@@ -1,0 +1,19 @@
+.wrapper{
+  width: 60%;
+  margin-inline: auto;
+}
+
+h2, h3, h4{
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+.mx-auto{
+  /* margin-inline: auto; */
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}

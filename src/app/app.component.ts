@@ -39,10 +39,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   beneficiaries_per_disease: number = 10;
 
   ngAfterViewInit(): void {
-    console.log('>>> add autocomplete false');
+    // console.log('>>> add autocomplete false');
     let inputs = document.querySelectorAll('input');
 
-    console.log('>> ', inputs);
+    // console.log('>> ', inputs);
 
     inputs.forEach((input) => {
       input.setAttribute('autocomplete', 'none');

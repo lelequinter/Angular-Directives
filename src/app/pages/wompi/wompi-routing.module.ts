@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: WompiComponent
+  },
+  {
+    path: 'transaction',
+    loadChildren: () => import('../transaction/transaction.module').then(m => m.TransactionModule)
   }
 ];
 
