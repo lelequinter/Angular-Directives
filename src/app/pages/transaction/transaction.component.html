@@ -8,6 +8,7 @@
     <p>{{ validateAmount() | currency:'COP $':'symbol':'1.0'}}</p>
     <p>Transacción #: {{ transactionData.id }}</p>
     <p>Referencia: {{ transactionData.reference }}</p>
+    <p>Fecha de realizacion: {{ transformDate() }}</p>
     <p>Pago efectuado con:</p>
     <div style="display: flex; justify-content: center;">
       <img src="https://transaction-redirect.wompi.co/2752e8bc402be2cd5a53578cee2b8a1a.svg">

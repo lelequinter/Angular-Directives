@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { DateTime } from 'luxon';
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
@@ -59,6 +59,17 @@ export class TransactionComponent implements OnInit {
 
   transactionStatus(){
     return this.status[this.transactionData?.status]
+  }
+
+  transformDate(){
+    const BogotaTimeZone = 'America/Bogota';
+    DateTime.utc().setZone(BogotaTimeZone);
+
+    const fecha = DateTime.fromISO(this.transactionData.created_at)
+                          .setLocale('es-ES')
+                          .toFormat("dd/LLLL/yyyy 'Hora:' HH:mm:ss");
+
+    return fecha;
   }
 
   redirectToCart(){
