@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
+import { Chance } from "chance";
 
 @Component({
   selector: 'app-wompi',
@@ -36,20 +37,22 @@ export class WompiComponent implements OnInit {
   }
 
   pay(){
+    const guid = new Chance().guid();
+    const now = DateTime.now().toFormat('-ddLLyyyy-HHmmss-ms');
+    const reference = `WP-RP-${guid}${now}`;
+
     const widget = (window as any)['WidgetCheckout'];
-    const now = DateTime.now().toFormat('yyyyLLddHHmmssms');
-    console.log('@now',now);
 
     const checkout = new widget({
       currency: 'COP',
       amountInCents: 2490000,
-      reference: `WP-RP-${now}`,
+      reference: reference,
       publicKey: 'pub_test_6yyW32kanLvHapiEQyb9xUaMceaI26GC',
       redirectUrl: 'http://localhost:4200/wompi/transaction', // Opcional
     })
 
     checkout.open(function ( result: any ) {
-      const transaction = result.transaction
+      const transaction = result.transaction;
       console.log('Transaction ID: ', transaction.id)
       console.log('Transaction object: ', transaction)
     })
