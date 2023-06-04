@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'wompi',
    loadChildren: () => import('./pages/wompi/wompi.module').then(m=> m.WompiModule)
   },
+  {
+    path: 'learn',
+   loadChildren: () => import('./pages/learn/learn.module').then(m=> m.LearnModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home'},
 ];
