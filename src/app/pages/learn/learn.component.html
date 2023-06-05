@@ -1,5 +1,10 @@
 
-<div class="wrapper">
+<div class="dashboard">
+  <h2>Cheap Aim-Lab</h2>
+  <p><strong>Score: </strong> <span id="score">{{ points }}</span></p>
+  <button (click)="restart()">Restart</button>
+</div>
+<div id="wrapper" class="wrapper">
   <div id="target">
   </div>
 </div>
