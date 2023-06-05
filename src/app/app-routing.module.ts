@@ -20,7 +20,7 @@ const routes: Routes = [
    loadChildren: () => import('./pages/wompi/wompi.module').then(m=> m.WompiModule)
   },
   {
-    path: 'learn',
+    path: 'aim-lab',
    loadChildren: () => import('./pages/learn/learn.module').then(m=> m.LearnModule)
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

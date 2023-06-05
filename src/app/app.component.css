@@ -1,3 +1,7 @@
+*{
+  font-family: system-ui;
+}
+
 .ry-expandable-wrapper{
   animation-fill-mode: both;
   max-height: 0;
