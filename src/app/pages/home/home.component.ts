@@ -22,7 +22,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   title = 'test';
 
   form: FormGroup = this.fb.group({
-    test: ['null', Validators.required],
+    test: [null, Validators.required],
     check: [false],
     name: ['leyder'],
     apellido: ['quintero'],
@@ -34,6 +34,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   regex3 = '/^[0-9].{10}$/';
   alphabeticRegex = '^[A-Z|a-z]+$';
   numericRegex = '^[0-9]+$';
+
+
+  get direccionError (){
+    const regexEspecialCharacters = /[^\w\s]/;
+
+    const test1 = regexEspecialCharacters.test(this.form.get('test')?.value);
+    // const test2 = regexNoEspecialCharacters.test("My@string-with(some%text)");
+
+    // console.log(test1, test2);
+    return test1;
+  }
 
   beneficiaries_per_disease: number = 10;
 

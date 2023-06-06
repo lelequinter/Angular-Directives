@@ -9,15 +9,16 @@
   <h1>Prueba de expresiones regulares</h1>
   <div>
     <form #formRef="ngForm" (ngSubmit)="onSubmit()"  [formGroup]="form">
+      <!-- [redMinMaxValues]="{ max: 50, min: 5 }" -->
       <input
-      [redMaxlength]="10"
-      [redMinMaxValues]="{ max: 50, min: 5 }"
+      [redMaxlength]="15"
         type="text"
         formControlName="test"
       />
       <button type="submit" [RyUnableClick]="form.get('check')?.value">
         onSubmit
       </button>
+      <p *ngIf="direccionError">Tiene caracteres especiales</p>
       <div style="display: flex">
         <input type="checkbox" formControlName="check" />
         <p>Disable click!</p>
@@ -45,6 +46,8 @@
     </button>
   </div>
   <br />
+
+  <!-- <button (click)="direccionError()" >Direccion error</button> -->
 
   <div id="content" class="ry-expandable-wrapper">
     <div
