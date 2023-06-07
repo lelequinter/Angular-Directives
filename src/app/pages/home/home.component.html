@@ -26,6 +26,7 @@
     </form>
     <pre>
       {{form.get('test')?.errors | json}}
+      {{form.get('test')?.valid}}
       <br>
       {{formRef.submitted}}
     </pre>

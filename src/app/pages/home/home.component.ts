@@ -21,8 +21,10 @@ import { BehaviorSubject } from 'rxjs';
 export class HomeComponent implements AfterViewInit, OnDestroy {
   title = 'test';
 
+  regexAlphanumeric = "^[a-z|A-Z|0-9 ]*$";
+
   form: FormGroup = this.fb.group({
-    test: [null, Validators.required],
+    test: [null, [Validators.required, Validators.pattern(this.regexAlphanumeric)]],
     check: [false],
     name: ['leyder'],
     apellido: ['quintero'],
@@ -35,15 +37,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   alphabeticRegex = '^[A-Z|a-z]+$';
   numericRegex = '^[0-9]+$';
 
+  regexAlphanumeric2 = "^[ a-z|A-Z|0-9\u00E0-\u00FC]*$";
 
   get direccionError (){
     const regexEspecialCharacters = /[^\w\s]/;
+    const hasEspecialCharacter = regexEspecialCharacters.test(this.form.get('test')?.value);
 
-    const test1 = regexEspecialCharacters.test(this.form.get('test')?.value);
-    // const test2 = regexNoEspecialCharacters.test("My@string-with(some%text)");
-
-    // console.log(test1, test2);
-    return test1;
+    return hasEspecialCharacter;
   }
 
   beneficiaries_per_disease: number = 10;
