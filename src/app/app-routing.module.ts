@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'aim-lab',
    loadChildren: () => import('./pages/learn/learn.module').then(m=> m.LearnModule)
   },
+  {
+    path: 'leader-line',
+   loadChildren: () => import('./pages/leader-line/leader-line.module').then(m=> m.LeaderLineModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home'},
 ];
