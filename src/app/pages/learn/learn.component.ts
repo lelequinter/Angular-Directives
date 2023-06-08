@@ -7,6 +7,8 @@ import { Subscriber, fromEvent, map, observable } from 'rxjs';
   styleUrls: ['./learn.component.css']
 })
 export class LearnComponent implements OnInit {
+  line: any = null;
+
   click$ = fromEvent<PointerEvent>(document, 'click');
 
   points: number = 0;
@@ -15,14 +17,18 @@ export class LearnComponent implements OnInit {
     this.click$
       .subscribe({
         next: (res) => {
+          const {x,y} = res;
+
           const wrapper: HTMLElement | null = document.getElementById("wrapper");
-          
+
           if(this.clickInside(res, wrapper)){
             const target: HTMLElement | null = document.getElementById("target");
             const clickRes: boolean = this.clickInside(res, target);
             this.pointsCounter(clickRes);
             this.scoreAnimation(clickRes);
             this.randomizePosition();
+            //! se resta el alto de la navBar y dasboard de aimLab
+            this.createTrackLine((x - 8 ),(y - ( 21 + (16*2)) - 41));
           }
         }
       })
@@ -34,7 +40,7 @@ export class LearnComponent implements OnInit {
     const Y = Number(wrapper?.clientHeight) - 100;
     const randomX = Math.floor(Math.random() * (X));
     const randomY = Math.floor(Math.random() * (Y));
-    
+
     const target: HTMLElement | null = document.getElementById("target");
     target?.style.setProperty('left', `${randomX}px`);
     target?.style.setProperty('top', `${randomY}px`);
@@ -61,7 +67,38 @@ export class LearnComponent implements OnInit {
   }
 
   clickInside(event: PointerEvent, element: any) {
-    return event.target == element || element.contains(event.target);
+    return event?.target == element || element?.contains(event.target);
+  }
+
+  createTrackLine(x: number, y:number){
+    console.log(x,y);
+
+    Boolean(this.line) && this.line.remove();
+
+    document.getElementById('prevClick')?.remove();
+
+    const wrapper: HTMLElement | null = document.getElementById("wrapper");
+
+    const prevClick: HTMLDivElement = document.createElement('div');
+    prevClick?.setAttribute('id','prevClick')
+    prevClick?.style.setProperty('position', `absolute`);
+    prevClick?.style.setProperty('top', `${y}px`);
+    prevClick?.style.setProperty('left', `${x}px`);
+
+    wrapper?.appendChild(prevClick);
+
+    const leaderLine = (window as any).LeaderLine;
+    this.line = new leaderLine(
+      document.getElementById('prevClick'),
+      document.getElementById('target'),
+      {
+        hide: true,
+        dash: {animation: true},
+        startPlug: 'disc',
+        endPlug: 'triangle'
+      }
+    );
+    this.line.show('draw',{duration: 300, timing: 'ease-in-out'});
   }
 
   restart(){
