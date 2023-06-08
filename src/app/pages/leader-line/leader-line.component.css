@@ -1,0 +1,14 @@
+#start{
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  padding: 20px;
+  background-color: rgb(255, 83, 83);
+  color: white;
+}
+
+#end{
+  padding: 20px;
+  background-color: rgb(64, 148, 64);
+  color: white;
+}
