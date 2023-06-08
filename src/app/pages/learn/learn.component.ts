@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber, fromEvent, map, observable } from 'rxjs';
 
 @Component({
@@ -6,7 +6,7 @@ import { Subscriber, fromEvent, map, observable } from 'rxjs';
   templateUrl: './learn.component.html',
   styleUrls: ['./learn.component.css']
 })
-export class LearnComponent implements OnInit {
+export class LearnComponent implements OnInit, OnDestroy {
   line: any = null;
 
   click$ = fromEvent<PointerEvent>(document, 'click');
@@ -71,13 +71,10 @@ export class LearnComponent implements OnInit {
   }
 
   createTrackLine(x: number, y:number){
-    console.log(x,y);
+    console.log('line',this.line);
 
-    Boolean(this.line) && this.line.remove();
-
+    if(Boolean(this.line))this.line.remove();
     document.getElementById('prevClick')?.remove();
-
-    const wrapper: HTMLElement | null = document.getElementById("wrapper");
 
     const prevClick: HTMLDivElement = document.createElement('div');
     prevClick?.setAttribute('id','prevClick')
@@ -85,6 +82,7 @@ export class LearnComponent implements OnInit {
     prevClick?.style.setProperty('top', `${y}px`);
     prevClick?.style.setProperty('left', `${x}px`);
 
+    const wrapper: HTMLElement | null = document.getElementById("wrapper");
     wrapper?.appendChild(prevClick);
 
     const leaderLine = (window as any).LeaderLine;
@@ -106,5 +104,12 @@ export class LearnComponent implements OnInit {
     const target: HTMLElement | null = document.getElementById("target");
     target?.style.setProperty('left', `calc(50% - 100px/2)`);
     target?.style.setProperty('top', `calc(50% - 100px/2)`);
+
+    this.line.hide('fade',{duration: 200});
+    document.getElementById('prevClick')?.remove();
+  }
+
+  ngOnDestroy(): void {
+    this.line.remove();
   }
 }
