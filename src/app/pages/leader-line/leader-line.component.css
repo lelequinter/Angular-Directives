@@ -1,14 +1,19 @@
-#start{
-  position: absolute;
-  top: 30%;
-  left: 10%;
+.start{
   padding: 20px;
   background-color: rgb(255, 83, 83);
   color: white;
+  user-select: none;
 }
 
-#end{
+#box-end-2{
+  position: absolute;
+  top: 30%;
+  left: 10%;
+}
+
+.end{
   padding: 20px;
   background-color: rgb(64, 148, 64);
   color: white;
+  user-select: none;
 }

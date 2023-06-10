@@ -30,7 +30,7 @@ export class LearnComponent implements OnInit, OnDestroy {
             //! se resta el alto de la navBar y dasboard de aimLab
             this.createTrackLine((x - 8 ),(y - ( 21 + (16*2)) - 41));
           }
-        }
+        },
       })
   }
 
@@ -71,9 +71,8 @@ export class LearnComponent implements OnInit, OnDestroy {
   }
 
   createTrackLine(x: number, y:number){
-    console.log('line',this.line);
+    Boolean(this.line) && this.line?.remove();
 
-    if(Boolean(this.line))this.line.remove();
     document.getElementById('prevClick')?.remove();
 
     const prevClick: HTMLDivElement = document.createElement('div');
@@ -110,6 +109,10 @@ export class LearnComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.line.remove();
+    // this.line?.remove();
+    const lineas = document.getElementsByClassName('leader-line');
+    Array.from(lineas).forEach( (linea: any) => {
+      linea.remove();
+    });
   }
 }
