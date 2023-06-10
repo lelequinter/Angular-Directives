@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber, fromEvent, map, observable } from 'rxjs';
 
 @Component({
@@ -6,32 +6,26 @@ import { Subscriber, fromEvent, map, observable } from 'rxjs';
   templateUrl: './learn.component.html',
   styleUrls: ['./learn.component.css']
 })
-export class LearnComponent implements OnInit, OnDestroy {
+export class LearnComponent implements OnDestroy {
   line: any = null;
-
-  click$ = fromEvent<PointerEvent>(document, 'click');
 
   points: number = 0;
 
-  ngOnInit(): void {
-    this.click$
-      .subscribe({
-        next: (res) => {
-          const {x,y} = res;
+  @HostListener('click', ['$event'])
+  onclick(res: any) {
+    const {x,y} = res;
 
-          const wrapper: HTMLElement | null = document.getElementById("wrapper");
+    const wrapper: HTMLElement | null = document.getElementById("wrapper");
 
-          if(this.clickInside(res, wrapper)){
-            const target: HTMLElement | null = document.getElementById("target");
-            const clickRes: boolean = this.clickInside(res, target);
-            this.pointsCounter(clickRes);
-            this.scoreAnimation(clickRes);
-            this.randomizePosition();
-            //! se resta el alto de la navBar y dasboard de aimLab
-            this.createTrackLine((x - 8 ),(y - ( 21 + (16*2)) - 41));
-          }
-        },
-      })
+    if(this.clickInside(res, wrapper)){
+      const target: HTMLElement | null = document.getElementById("target");
+      const clickRes: boolean = this.clickInside(res, target);
+      this.pointsCounter(clickRes);
+      this.scoreAnimation(clickRes);
+      this.randomizePosition();
+      //! se resta el alto de la navBar y dasboard de aimLab
+      this.createTrackLine((x - 8 ),(y - ( 21 + (16*2)) - 41));
+    }
   }
 
   randomizePosition() {
