@@ -1,8 +1,22 @@
-<div style="display: flex; justify-content: space-between;">
-  <div id="box-start-1" class="start">start-1</div>
-  <div id="box-end-1" class="end">end-1</div>
+<div class="wrapper">
+
+  <div
+    class="box"
+    *ngFor="let item of [1,2,3,4]"
+    [id]="'box'+item"
+    cdkDragBoundary=".wrapper"
+    cdkDrag
+  >
+    {{'box'+item}}
+  </div>
+
+  <!-- <div style="display: flex; justify-content: space-between;">
+    <div id="box-start-1" class="start">start-1</div>
+    <div id="box-end-1" class="end">end-1</div>
+  </div>
+  <div style="display: flex; justify-content: space-between;">
+    <div id="box-start-2" class="start">start-2</div>
+    <div id="box-end-2" class="end">end-2</div>
+  </div> -->
 </div>
-<div style="display: flex; justify-content: space-between;">
-  <div id="box-start-2" class="start">start-2</div>
-  <div id="box-end-2" class="end">end-2</div>
-</div>
+
