@@ -2,10 +2,11 @@
 
   <div
     class="box"
-    *ngFor="let item of [1,2,3,4]"
+    *ngFor="let item of draggableItems"
     [id]="'box'+item"
     cdkDragBoundary=".wrapper"
     cdkDrag
+    [cdkDragFreeDragPosition]="dragPositions[item]"
   >
     {{'box'+item}}
   </div>
@@ -19,4 +20,5 @@
     <div id="box-end-2" class="end">end-2</div>
   </div> -->
 </div>
+<button (click)="changeDragPosition()" >positions</button>
 

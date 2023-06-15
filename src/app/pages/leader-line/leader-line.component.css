@@ -1,5 +1,7 @@
 .wrapper{
   position: relative;
+  background-color: antiquewhite;
+  height: 95%;
 }
 
 .box{
