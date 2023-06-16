@@ -1,5 +1,4 @@
 <div class="wrapper">
-
   <div
     class="box"
     *ngFor="let item of draggableItems; index as i"
@@ -8,9 +7,6 @@
     cdkDrag
     [cdkDragFreeDragPosition]="dragPositions[i]"
   >
-    {{'box'+item}}
+  <input [value]="'box'+item"/>
   </div>
 </div>
-<!-- <button (click)="testFuction()" >test</button>
-<button (click)="changeDraggableElementsPosition()" >test2</button> -->
-

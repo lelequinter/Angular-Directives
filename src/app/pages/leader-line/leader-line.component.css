@@ -7,10 +7,26 @@
 .box{
   background-color: rgb(68, 145, 196);
   color: white;
-  cursor: move;
+  /* cursor: move; */
   height: 30px;
   padding: 20px;
   position: absolute;
   user-select: none;
-  width: 30px;
+  width: 60px;
+  border-radius: 15px;
+}
+
+.box input {
+  background-color: transparent;
+  width: 100%;
+  border: 0;
+  outline: none;
+  padding: 5px;
+}
+
+.box input:focus{
+  outline-style: ridge;
+  outline-color: rgba(117, 117, 117, 0.4);
+  border-radius: 10px;
+  background-color: rgba(117, 117, 117, 0.2);
 }
