@@ -1,12 +1,11 @@
-import { Component, OnDestroy, HostListener, OnInit } from '@angular/core';
+import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-leader-line',
   templateUrl: './leader-line.component.html',
   styleUrls: ['./leader-line.component.css'],
 })
-export class LeaderLineComponent implements OnInit, OnDestroy {
-
+export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   draggableItems = [1,2,3,4];
 
   dragPositions = this.draggableItems.map((_) => ({x: 0, y: 0}));
@@ -30,6 +29,8 @@ export class LeaderLineComponent implements OnInit, OnDestroy {
   selectSecondElementTimeout = setTimeout(() => {
     this.elementsToMatch = [];
   }, this.timeoutTimeInSeconds);
+
+  constructor( private changeDetector: ChangeDetectorRef ){}
 
   @HostListener('mousedown')
   onmousedown() {
@@ -102,19 +103,8 @@ export class LeaderLineComponent implements OnInit, OnDestroy {
     this.leaderLineArray.push({
     line,
     startElement: this.elementsToMatch[0].id,
-    // coordsStartElement: {
-    //   x: this.elementsToMatch[0].getBoundingClientRect().left,
-    //   y: this.elementsToMatch[0].getBoundingClientRect().top
-    // },
     endElement: this.elementsToMatch[1].id,
-    // coodrsEndElement: {
-    //   x: this.elementsToMatch[1].getBoundingClientRect().left,
-    //   y: this.elementsToMatch[1].getBoundingClientRect().top
-    // },
     });
-
-    console.log(this.leaderLineArray);
-
 
     //* Metodo para dibujar la linea con aminacion de dibujo
     line.show('draw', { duration: 300, timing: 'ease-in-out' });
@@ -123,17 +113,36 @@ export class LeaderLineComponent implements OnInit, OnDestroy {
     this.elementsToMatch = [];
   }
 
-  changeDragPosition(){
-    console.log(this.dragPositions);
+  changeDraggableElementsPosition(){
+    const elementsCoords = JSON.parse(localStorage.getItem('elementsCoords')?? '[]');
 
-
+    elementsCoords.forEach((element: any, index: number) => {
+      this.dragPositions[ index + 1 ] = element;
+    });
   }
 
-  ngOnInit(): void {
-    //* Obteniendo el array de lineas
-    const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
-    console.log('storageLeaderLineArray',storageLeaderLineArray);
+  ngAfterViewInit(): void {
+    this.changeDraggableElementsPosition();
 
+    //* Obteniendo el array de los elementos de incio y fin de cada linea
+    const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
+
+    //* Recorriendo el array del localStorage para dibujar nuevamente las lineas
+    storageLeaderLineArray.forEach((elements: any) => {
+        this.elementsToMatch[0] = document.getElementById(`${elements.startElement}`);
+        this.elementsToMatch[1] = document.getElementById(`${elements.endElement}`);
+
+        this.drawLeaderLine();
+    });
+
+    this.changeDetector.detectChanges();
+
+    //* Dibujando las lineas hacia sus respectivos elementos
+    if (Boolean(this.leaderLineArray.length)) {
+      this.leaderLineArray.forEach((linea) => {
+        linea.line?.position();
+      });
+    }
   }
 
   saveLines() {
