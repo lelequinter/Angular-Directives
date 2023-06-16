@@ -1,11 +1,11 @@
-import { Component, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-leader-line',
   templateUrl: './leader-line.component.html',
   styleUrls: ['./leader-line.component.css'],
 })
-export class LeaderLineComponent implements OnDestroy {
+export class LeaderLineComponent implements OnInit, OnDestroy {
 
   draggableItems = [1,2,3,4];
 
@@ -101,16 +101,16 @@ export class LeaderLineComponent implements OnDestroy {
     //* luego acceder a ellas y llamar los metodos de cada una
     this.leaderLineArray.push({
     line,
-    startElement: this.elementsToMatch[0],
-    coordsStartElement: {
-      x: this.elementsToMatch[0].getBoundingClientRect().left,
-      y: this.elementsToMatch[0].getBoundingClientRect().top
-    },
-    endElement: this.elementsToMatch[1],
-    coodrsEndElement: {
-      x: this.elementsToMatch[1].getBoundingClientRect().left,
-      y: this.elementsToMatch[1].getBoundingClientRect().top
-    },
+    startElement: this.elementsToMatch[0].id,
+    // coordsStartElement: {
+    //   x: this.elementsToMatch[0].getBoundingClientRect().left,
+    //   y: this.elementsToMatch[0].getBoundingClientRect().top
+    // },
+    endElement: this.elementsToMatch[1].id,
+    // coodrsEndElement: {
+    //   x: this.elementsToMatch[1].getBoundingClientRect().left,
+    //   y: this.elementsToMatch[1].getBoundingClientRect().top
+    // },
     });
 
     console.log(this.leaderLineArray);
@@ -126,6 +126,35 @@ export class LeaderLineComponent implements OnDestroy {
   changeDragPosition(){
     console.log(this.dragPositions);
 
+
+  }
+
+  ngOnInit(): void {
+    //* Obteniendo el array de lineas
+    const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
+    console.log('storageLeaderLineArray',storageLeaderLineArray);
+
+  }
+
+  saveLines() {
+    //* Guardar en localStorage el leaderLineArray, para luego en el ng on init crear todo
+    const storageLeaderLineArray: any[] = this.leaderLineArray.map(({line, ...rest}) => rest)
+
+    localStorage.setItem('leaderLineArray', JSON.stringify(storageLeaderLineArray));
+  }
+
+  saveElementsCoords() {
+    const elementsCoords = this.draggableItems.map((item: number) => {
+      //* Obteniendo el elemento
+      const element = document.getElementById(`box${item}`);
+      //* Capturando las posiciones en X y Y
+      const x = element?.getBoundingClientRect().left;
+      const y = element?.getBoundingClientRect().top;
+
+      return {x,y};
+    });
+
+    localStorage.setItem('elementsCoords', JSON.stringify(elementsCoords));
   }
 
   ngOnDestroy(): void {
@@ -134,6 +163,16 @@ export class LeaderLineComponent implements OnDestroy {
       linea?.line?.remove();
     });
 
-    //* Guardar en localStorage el leaderLineArray, para luego en el ng on init crear todo
+    //* Guardando las lineas si se cambia de vista
+    this.saveLines();
+    this.saveElementsCoords();
   }
+
+  @HostListener('window:beforeunload', ['$event'])
+  BeforeUnloadEvent(){
+    //* Guardando las lineas si se refresca la pagina
+    this.saveLines();
+    this.saveElementsCoords();
+  }
+
 }
