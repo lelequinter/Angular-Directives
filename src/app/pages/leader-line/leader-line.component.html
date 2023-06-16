@@ -2,23 +2,15 @@
 
   <div
     class="box"
-    *ngFor="let item of draggableItems"
+    *ngFor="let item of draggableItems; index as i"
     [id]="'box'+item"
     cdkDragBoundary=".wrapper"
     cdkDrag
-    [cdkDragFreeDragPosition]="dragPositions[item]"
+    [cdkDragFreeDragPosition]="dragPositions[i]"
   >
     {{'box'+item}}
   </div>
-
-  <!-- <div style="display: flex; justify-content: space-between;">
-    <div id="box-start-1" class="start">start-1</div>
-    <div id="box-end-1" class="end">end-1</div>
-  </div>
-  <div style="display: flex; justify-content: space-between;">
-    <div id="box-start-2" class="start">start-2</div>
-    <div id="box-end-2" class="end">end-2</div>
-  </div> -->
 </div>
-<button (click)="changeDraggableElementsPosition()" >positions</button>
+<!-- <button (click)="testFuction()" >test</button>
+<button (click)="changeDraggableElementsPosition()" >test2</button> -->
 

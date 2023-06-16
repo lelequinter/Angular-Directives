@@ -1,34 +1,16 @@
 .wrapper{
-  position: relative;
   background-color: antiquewhite;
-  height: 80%;
+  height: 90%;
+  position: relative;
 }
 
 .box{
-  height: 30px;
-  width: 30px;
-  padding: 20px;
   background-color: rgb(68, 145, 196);
   color: white;
-  user-select: none;
-}
-
-.start{
+  cursor: move;
+  height: 30px;
   padding: 20px;
-  background-color: rgb(255, 83, 83);
-  color: white;
-  user-select: none;
-}
-
-#box-end-2{
   position: absolute;
-  top: 30%;
-  left: 10%;
-}
-
-.end{
-  padding: 20px;
-  background-color: rgb(64, 148, 64);
-  color: white;
   user-select: none;
+  width: 30px;
 }

@@ -117,7 +117,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     const elementsCoords = JSON.parse(localStorage.getItem('elementsCoords')?? '[]');
 
     elementsCoords.forEach((element: any, index: number) => {
-      this.dragPositions[ index + 1 ] = element;
+      this.dragPositions[ index ] = element;
     });
   }
 
@@ -128,12 +128,14 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
 
     //* Recorriendo el array del localStorage para dibujar nuevamente las lineas
-    storageLeaderLineArray.forEach((elements: any) => {
-        this.elementsToMatch[0] = document.getElementById(`${elements.startElement}`);
-        this.elementsToMatch[1] = document.getElementById(`${elements.endElement}`);
+    setTimeout(() => {
+      storageLeaderLineArray.forEach((elements: any) => {
+          this.elementsToMatch[0] = document.getElementById(`${elements.startElement}`);
+          this.elementsToMatch[1] = document.getElementById(`${elements.endElement}`);
 
-        this.drawLeaderLine();
-    });
+          this.drawLeaderLine();
+      });
+    }, 100);
 
     this.changeDetector.detectChanges();
 
@@ -153,12 +155,12 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   }
 
   saveElementsCoords() {
-    const elementsCoords = this.draggableItems.map((item: number) => {
+    const elementsCoords = Array.from(this.draggableItems).map((item: number) => {
       //* Obteniendo el elemento
       const element = document.getElementById(`box${item}`);
       //* Capturando las posiciones en X y Y
-      const x = element?.getBoundingClientRect().left;
-      const y = element?.getBoundingClientRect().top;
+      const x = Number(element?.getBoundingClientRect().left);
+      const y = Number(element?.getBoundingClientRect().top) - 48;
 
       return {x,y};
     });
@@ -182,6 +184,11 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     //* Guardando las lineas si se refresca la pagina
     this.saveLines();
     this.saveElementsCoords();
+  }
+
+  testFuction(){
+    console.log(this.draggableItems);
+    console.log(this.dragPositions);
   }
 
 }
