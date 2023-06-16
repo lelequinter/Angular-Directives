@@ -1,6 +1,6 @@
 .wrapper{
   background-color: antiquewhite;
-  height: 90%;
+  height: calc(100% - 52px);
   position: relative;
 }
 
