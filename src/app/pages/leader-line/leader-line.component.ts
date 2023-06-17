@@ -172,8 +172,26 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     localStorage.setItem('elementsCoords', JSON.stringify(elementsCoords));
   }
 
-  dropped(event: any){
-    console.log('dropped', event);
+  droppedToCreate(event: any, item: any){
+    console.log('droppedToCreate',event);
+    const { x, y } = event.dropPoint;
+
+    if(event.event.target.className == 'wrapper' ){
+      console.log('inside wrapper');
+      this.draggableItems.push(this.draggableItems.length +1)
+
+      const navbarHeight = 48;
+      const dashboardHeight = 66;
+
+
+      const boxHeight = 70;
+      const boxWidth = 100;
+
+      this.dragPositions.push({
+        x: Number(x) - (boxWidth/2),
+        y: Number(y) - navbarHeight - dashboardHeight - (boxHeight/2)
+      });
+    }
 
   }
 

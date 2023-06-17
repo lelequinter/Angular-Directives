@@ -50,4 +50,5 @@
   background-color: rgb(68, 145, 196);
   padding: 10px;
   border-radius: 10px;
+  user-select: none;
 }

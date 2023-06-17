@@ -1,16 +1,31 @@
-<div class="dashboard">
-  <div class="draggable-rect">
+<div
+  cdkDropList
+  class="dashboard"
+  >
+  <!-- cdkDropListConnectedTo="drop-wrapper" -->
+  <!-- (cdkDropListDropped)="itemDropped($event)" -->
+  <div
+    cdkDrag
+    class="draggable-rect"
+    [cdkDragData]="{text: 'box'}"
+    (cdkDragDropped)="droppedToCreate($event,{text: 'box'})"
+  >
     box#
   </div>
 </div>
-<div class="wrapper">
+
+<!-- (cdkDropListDropped)="itemDropped($event)" -->
+<div
+  class="wrapper"
+  cdkDropListSortingDisabled="true"
+  >
   <div
+    cdkDrag
     class="box"
-    *ngFor="let item of draggableItems; index as i"
     [id]="'box'+item"
     cdkDragBoundary=".wrapper"
-    cdkDrag
     [cdkDragFreeDragPosition]="dragPositions[i]"
+    *ngFor="let item of draggableItems; index as i"
   >
   <input [disabled]="true" [value]="'box'+item"/>
   </div>
