@@ -6,8 +6,10 @@ import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } 
   styleUrls: ['./leader-line.component.css'],
 })
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
+  //* Arreglo de elementos que ponemos mover y conectar
   draggableItems = [1,2,3,4];
 
+  //* Arreglo de posiciones de los elementos en el wrapper
   dragPositions = this.draggableItems.map((_) => ({x: 0, y: 0}));
 
   //* Arreglo para guardar el espacio en memoria
@@ -159,8 +161,10 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       //* Obteniendo el elemento
       const element = document.getElementById(`box${item}`);
       //* Capturando las posiciones en X y Y
+      const navbarHeight = 48;
+      const dashboardHeight = 66;
       const x = Number(element?.getBoundingClientRect().left);
-      const y = Number(element?.getBoundingClientRect().top) - 48 - 66;
+      const y = Number(element?.getBoundingClientRect().top) - navbarHeight - dashboardHeight;
 
       return {x,y};
     });
