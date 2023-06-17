@@ -1,5 +1,9 @@
-<div class="dashboard"></div>
-<div class="wrapper" (cdkDropListDropped)="dropped($event)">
+<div class="dashboard">
+  <div class="draggable-rect">
+    box#
+  </div>
+</div>
+<div class="wrapper">
   <div
     class="box"
     *ngFor="let item of draggableItems; index as i"

@@ -40,4 +40,14 @@
   height: 50px;
   padding: 8px;
   background: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.draggable-rect{
+  height: auto;
+  background-color: rgb(68, 145, 196);
+  padding: 10px;
+  border-radius: 10px;
 }
