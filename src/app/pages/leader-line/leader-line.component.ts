@@ -123,7 +123,24 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     });
   }
 
+  setDraggableItems(){
+    const elementsCoords = JSON.parse(localStorage.getItem('elementsCoords')?? '[]');
+
+    if(elementsCoords.length){
+      //* Limpiando el arreglo para setear los demás
+      this.draggableItems = [];
+      elementsCoords.forEach((_: any, index: number) => {
+        //* Pusheando los los items al arreglo para mostrarlos en pantalla
+        this.draggableItems.push(index + 1);
+      });
+    }
+  }
+
   ngAfterViewInit(): void {
+    //* Creando los elementos a mostrar en pantalla
+    this.setDraggableItems();
+
+    //* Llamando el metodo para ubicar los elementos en la posicion en la que estaba en pantalla
     this.changeDraggableElementsPosition();
 
     //* Obteniendo el array de los elementos de incio y fin de cada linea
