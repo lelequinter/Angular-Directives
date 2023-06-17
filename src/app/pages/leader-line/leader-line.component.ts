@@ -160,12 +160,17 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       const element = document.getElementById(`box${item}`);
       //* Capturando las posiciones en X y Y
       const x = Number(element?.getBoundingClientRect().left);
-      const y = Number(element?.getBoundingClientRect().top) - 48;
+      const y = Number(element?.getBoundingClientRect().top) - 48 - 66;
 
       return {x,y};
     });
 
     localStorage.setItem('elementsCoords', JSON.stringify(elementsCoords));
+  }
+
+  dropped(event: any){
+    console.log('dropped', event);
+
   }
 
   ngOnDestroy(): void {
@@ -190,5 +195,6 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     console.log(this.draggableItems);
     console.log(this.dragPositions);
   }
+
 
 }

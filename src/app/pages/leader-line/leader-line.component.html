@@ -1,4 +1,5 @@
-<div class="wrapper">
+<div class="dashboard"></div>
+<div class="wrapper" (cdkDropListDropped)="dropped($event)">
   <div
     class="box"
     *ngFor="let item of draggableItems; index as i"
@@ -7,6 +8,6 @@
     cdkDrag
     [cdkDragFreeDragPosition]="dragPositions[i]"
   >
-  <input [value]="'box'+item"/>
+  <input [disabled]="true" [value]="'box'+item"/>
   </div>
 </div>

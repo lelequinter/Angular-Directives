@@ -1,6 +1,6 @@
 .wrapper{
   background-color: antiquewhite;
-  height: calc(100% - 52px);
+  height: calc(100% - 52px - 50px - (8px * 2) );
   position: relative;
 }
 
@@ -24,9 +24,20 @@
   padding: 5px;
 }
 
+.box input[disabled]{
+  color: black;
+  pointer-events: none;
+}
+
 .box input:focus{
   outline-style: ridge;
   outline-color: rgba(117, 117, 117, 0.4);
   border-radius: 10px;
   background-color: rgba(117, 117, 117, 0.2);
+}
+
+.dashboard{
+  height: 50px;
+  padding: 8px;
+  background: aliceblue;
 }
