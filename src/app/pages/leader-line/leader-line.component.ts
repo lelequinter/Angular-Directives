@@ -1,4 +1,5 @@
 import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { IElements } from './models/line-elements-model';
 
 @Component({
   selector: 'app-leader-line',
@@ -6,6 +7,9 @@ import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } 
   styleUrls: ['./leader-line.component.css'],
 })
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
+  //* Arreglo de elementos en pantalla
+  elementsArray: IElements[] = [];
+
   //* Arreglo de elementos que ponemos mover y conectar
   draggableItems = [1,2,3,4];
 
