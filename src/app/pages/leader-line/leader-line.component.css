@@ -16,7 +16,7 @@
   border-radius: 15px;
 }
 
-.box input {
+.box .input-text {
   background-color: transparent;
   width: 100%;
   border: 0;
@@ -24,12 +24,12 @@
   padding: 5px;
 }
 
-.box input[disabled]{
+.box .input-text[disabled]{
   color: black;
   pointer-events: none;
 }
 
-.box input:focus{
+.box .input-text:focus{
   outline-style: ridge;
   outline-color: rgba(117, 117, 117, 0.4);
   border-radius: 10px;
@@ -51,4 +51,23 @@
   padding: 10px;
   border-radius: 10px;
   user-select: none;
+}
+
+.edit-sw{
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  appearance: none;
+  background-color: aliceblue;
+  width: 36px;
+  padding: 0 3px;
+  text-align: center;
+  border-radius: 4px;
+
+  &::before{
+    content: 'Edit';
+  }
+  &:checked::before{
+    content: 'Save';
+  }
 }
