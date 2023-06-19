@@ -8,7 +8,7 @@
     cdkDrag
     class="draggable-rect"
     [cdkDragData]="{text: 'box'}"
-    (cdkDragDropped)="droppedToCreate($event,{text: 'box'})"
+    (cdkDragDropped)="droppedToCreate($event)"
   >
     box#
   </div>
@@ -22,11 +22,11 @@
   <div
     cdkDrag
     class="box"
-    [id]="'box'+item"
+    [id]="'box' + element.id"
     cdkDragBoundary=".wrapper"
-    [cdkDragFreeDragPosition]="dragPositions[i]"
-    *ngFor="let item of draggableItems; index as i"
+    [cdkDragFreeDragPosition]="element.coords"
+    *ngFor="let element of elementsArray; index as i"
   >
-  <input [disabled]="true" [value]="'box'+item"/>
+  <input [disabled]="true" [value]="element.value"/>
   </div>
 </div>

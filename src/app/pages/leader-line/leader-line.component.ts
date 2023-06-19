@@ -8,13 +8,18 @@ import { IElements } from './models/line-elements-model';
 })
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   //* Arreglo de elementos en pantalla
-  elementsArray: IElements[] = [];
-
-  //* Arreglo de elementos que ponemos mover y conectar
-  draggableItems = [1,2,3,4];
-
-  //* Arreglo de posiciones de los elementos en el wrapper
-  dragPositions = this.draggableItems.map((_) => ({x: 0, y: 0}));
+  elementsArray: IElements[] = [
+    // {
+    //   id: 1,
+    //   value: 'lele',
+    //   coords: {x: 150, y: 50},
+    //   properties: {
+    //     shape: 'circle',
+    //     color: 'blue',
+    //     role: 'player'
+    //   },
+    // }
+  ];
 
   //* Arreglo para guardar el espacio en memoria
   //* de las lineas creadas
@@ -119,23 +124,13 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     this.elementsToMatch = [];
   }
 
-  changeDraggableElementsPosition(){
-    const elementsCoords = JSON.parse(localStorage.getItem('elementsCoords')?? '[]');
+  setElementsArray(){
+    const elementsArray = JSON.parse(localStorage.getItem('elementsArray')?? '[]');
 
-    elementsCoords.forEach((element: any, index: number) => {
-      this.dragPositions[ index ] = element;
-    });
-  }
-
-  setDraggableItems(){
-    const elementsCoords = JSON.parse(localStorage.getItem('elementsCoords')?? '[]');
-
-    if(elementsCoords.length){
-      //* Limpiando el arreglo para setear los demás
-      this.draggableItems = [];
-      elementsCoords.forEach((_: any, index: number) => {
+    if(elementsArray.length){
+      elementsArray.forEach(( element: IElements, index: number) => {
         //* Pusheando los los items al arreglo para mostrarlos en pantalla
-        this.draggableItems.push(index + 1);
+        this.elementsArray.push(element);
       });
     }
   }
@@ -150,19 +145,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   ngAfterViewInit(): void {
     //* Creando los elementos a mostrar en pantalla
-    this.setDraggableItems();
-
-    //* Llamando el metodo para ubicar los elementos en la posicion en la que estaba en pantalla
-    setTimeout(() => {
-      this.setElementsTransiton(true);
-
-      this.changeDraggableElementsPosition();
-
-      setTimeout(() => {
-        this.setElementsTransiton(false);
-      }, 500);
-
-    }, 500);
+    this.setElementsArray();
 
     //* Obteniendo el array de los elementos de incio y fin de cada linea
     const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
@@ -175,7 +158,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
           this.drawLeaderLine();
       });
-    }, 1000);
+    }, 300);
 
     this.changeDetector.detectChanges();
 
@@ -194,43 +177,48 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     localStorage.setItem('leaderLineArray', JSON.stringify(storageLeaderLineArray));
   }
 
-  saveElementsCoords() {
-    const elementsCoords = Array.from(this.draggableItems).map((item: number) => {
+  saveElementsArray() {
+
+    this.elementsArray.forEach((item: IElements) => {
       //* Obteniendo el elemento
-      const element = document.getElementById(`box${item}`);
+      const element = document.getElementById(`box${item.id}`);
       //* Capturando las posiciones en X y Y
       const navbarHeight = 52;
       const dashboardHeight = 66;
+
       const x = Number(element?.getBoundingClientRect().left);
       const y = Number(element?.getBoundingClientRect().top) - navbarHeight - dashboardHeight;
 
-      return {x,y};
+      item.coords = { x, y };
     });
 
-    localStorage.setItem('elementsCoords', JSON.stringify(elementsCoords));
+    localStorage.setItem('elementsArray', JSON.stringify(this.elementsArray));
   }
 
-  droppedToCreate(event: any, item: any){
-    console.log('droppedToCreate',event);
+  droppedToCreate(event: any){
     const { x, y } = event.dropPoint;
 
     if(event.event.target.className == 'wrapper' ){
-      console.log('inside wrapper');
-      this.draggableItems.push(this.draggableItems.length +1)
-
       const navbarHeight = 52;
       const dashboardHeight = 66;
-
 
       const boxHeight = 70;
       const boxWidth = 100;
 
-      this.dragPositions.push({
-        x: Number(x) - (boxWidth/2),
-        y: Number(y) - navbarHeight - dashboardHeight - (boxHeight/2)
+      this.elementsArray.push({
+          id: this.elementsArray.length + 1,
+          value: `box${this.elementsArray.length + 1}`,
+          coords: {
+              x: Number(x) - ( boxWidth / 2 ),
+              y: Number(y) - navbarHeight - dashboardHeight - ( boxHeight / 2 )
+          },
+          properties: {
+            shape: 'circle',
+            color: 'blue',
+            role: 'player'
+          },
       });
     }
-
   }
 
   ngOnDestroy(): void {
@@ -241,20 +229,14 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
     //* Guardando las lineas si se cambia de vista
     this.saveLines();
-    this.saveElementsCoords();
+    this.saveElementsArray();
   }
 
   @HostListener('window:beforeunload', ['$event'])
   BeforeUnloadEvent(){
     //* Guardando las lineas si se refresca la pagina
     this.saveLines();
-    this.saveElementsCoords();
+    this.saveElementsArray();
   }
-
-  testFuction(){
-    console.log(this.draggableItems);
-    console.log(this.dragPositions);
-  }
-
 
 }
