@@ -136,12 +136,29 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
+  setElementsTransiton(status: boolean){
+    const draggableElements: HTMLCollectionOf<Element> = document.getElementsByClassName('box');
+
+      Array.from(draggableElements).forEach((element: any) => {
+        element?.style.setProperty('transition', status ? '500ms ease-in-out' : 'none');
+      })
+  }
+
   ngAfterViewInit(): void {
     //* Creando los elementos a mostrar en pantalla
     this.setDraggableItems();
 
     //* Llamando el metodo para ubicar los elementos en la posicion en la que estaba en pantalla
-    this.changeDraggableElementsPosition();
+    setTimeout(() => {
+      this.setElementsTransiton(true);
+
+      this.changeDraggableElementsPosition();
+
+      setTimeout(() => {
+        this.setElementsTransiton(false);
+      }, 500);
+
+    }, 500);
 
     //* Obteniendo el array de los elementos de incio y fin de cada linea
     const storageLeaderLineArray = JSON.parse(localStorage.getItem('leaderLineArray')?? '[]');
@@ -154,7 +171,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
           this.drawLeaderLine();
       });
-    }, 100);
+    }, 1000);
 
     this.changeDetector.detectChanges();
 
@@ -178,7 +195,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       //* Obteniendo el elemento
       const element = document.getElementById(`box${item}`);
       //* Capturando las posiciones en X y Y
-      const navbarHeight = 48;
+      const navbarHeight = 52;
       const dashboardHeight = 66;
       const x = Number(element?.getBoundingClientRect().left);
       const y = Number(element?.getBoundingClientRect().top) - navbarHeight - dashboardHeight;
@@ -197,7 +214,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       console.log('inside wrapper');
       this.draggableItems.push(this.draggableItems.length +1)
 
-      const navbarHeight = 48;
+      const navbarHeight = 52;
       const dashboardHeight = 66;
 
 
