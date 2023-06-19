@@ -67,6 +67,8 @@
   padding: 3px;
   text-align: center;
   border-radius: 4px;
+  width: 24px;
+  height: 23px;
 
   &::before{
     content: '📝';
@@ -86,4 +88,30 @@
   background-color: rgb(81, 230, 81);
   color: black;
 
+}
+
+.delete-btn{
+  appearance: none;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 23px;
+  padding: 3px;
+  background-color: red;
+  transition: 300ms ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.delete-btn.show{
+  right: 22px;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.delete-btn.show:active{
+  background-color: rgb(255, 70, 70);
 }

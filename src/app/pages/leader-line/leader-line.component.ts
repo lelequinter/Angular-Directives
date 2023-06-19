@@ -227,6 +227,10 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
+  deleteElement(index: number){
+    this.elementsArray.splice(index, 1);
+  }
+
   ngOnDestroy(): void {
     //* Removiendo las lineas cuando cambie de vista
     this.leaderLineArray.forEach((linea: any) => {

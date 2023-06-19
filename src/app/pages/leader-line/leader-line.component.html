@@ -34,6 +34,11 @@
     [value]="element.value"
     [disabled]="!editSw.checked"
   >
+  <button
+    class="delete-btn"
+    [ngClass]="editSw.checked ? 'show' : ''"
+    (click)="deleteElement(i)"
+  >❌</button>
   <input
     #editSw
     class="edit-sw"
