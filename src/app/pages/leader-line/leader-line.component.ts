@@ -139,8 +139,8 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   setElementsTransiton(status: boolean){
     const draggableElements: HTMLCollectionOf<Element> = document.getElementsByClassName('box');
 
-      Array.from(draggableElements).forEach((element: any) => {
-        element?.style.setProperty('transition', status ? '500ms ease-in-out' : 'none');
+      Array.from(draggableElements).forEach((element: Element) => {
+        (element as HTMLElement)?.style.setProperty('transition', status ? '500ms ease-in-out' : 'none');
       })
   }
 
