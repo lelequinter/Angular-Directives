@@ -37,6 +37,7 @@
   <input
     #editSw
     class="edit-sw"
+    [ngClass]="!editSw.checked ? 'edit-mode' : 'save-mode'"
     type="checkbox"
     [defaultChecked]="false"
     (click)="editValue(!editSw.checked, i, inputText.value)"

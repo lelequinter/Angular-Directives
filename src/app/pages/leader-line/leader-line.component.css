@@ -17,16 +17,21 @@
 }
 
 .box .input-text {
-  background-color: transparent;
   width: 100%;
   border: 0;
-  outline: none;
   padding: 5px;
+  border: 2px ridge rgba(117, 117, 117, 0.4);
+  outline-color: rgba(117, 117, 117, 0.4);
+  border-radius: 10px;
+  background-color: rgba(117, 117, 117, 0.2);
 }
 
 .box .input-text[disabled]{
   color: black;
+  outline: none;
   pointer-events: none;
+  background-color: transparent;
+  border: none;
 }
 
 .box .input-text:focus{
@@ -55,19 +60,30 @@
 
 .edit-sw{
   position: absolute;
-  bottom: 0;
-  right: 10px;
+  top: -8px;
+  right: -8px;
   appearance: none;
   background-color: aliceblue;
-  width: 36px;
-  padding: 0 3px;
+  padding: 3px;
   text-align: center;
   border-radius: 4px;
 
   &::before{
-    content: 'Edit';
+    content: '📝';
   }
   &:checked::before{
-    content: 'Save';
+    content: '💾';
   }
+}
+
+.edit-sw.edit-mode{
+  background-color: rgb(57, 57, 200);
+  color: white;
+
+}
+
+.edit-sw.save-mode{
+  background-color: rgb(81, 230, 81);
+  color: black;
+
 }
