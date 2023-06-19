@@ -27,7 +27,19 @@
     [cdkDragFreeDragPosition]="element.coords"
     *ngFor="let element of elementsArray; index as i"
   >
-  <input [disabled]="!editSw.checked" [value]="element.value" type="text" class="input-text"/>
-  <input #editSw [defaultChecked]="false" (click)="editValue(!editSw.checked)" type="checkbox" class="edit-sw">
+  <input
+    #inputText
+    type="text"
+    class="input-text"
+    [value]="element.value"
+    [disabled]="!editSw.checked"
+  >
+  <input
+    #editSw
+    class="edit-sw"
+    type="checkbox"
+    [defaultChecked]="false"
+    (click)="editValue(!editSw.checked, i, inputText.value)"
+  >
   </div>
 </div>

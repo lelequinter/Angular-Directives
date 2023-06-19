@@ -221,9 +221,10 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
-  editValue(value: any){
-    console.log(value);
-
+  editValue(value: boolean, index: number, text: string){
+    if(value){
+      this.elementsArray[index].value = text;
+    }
   }
 
   ngOnDestroy(): void {
