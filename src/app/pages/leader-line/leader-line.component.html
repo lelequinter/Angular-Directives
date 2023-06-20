@@ -31,6 +31,7 @@
     class="input-text"
     [value]="element.value"
     [disabled]="!editSw.checked"
+    (keydown.enter)="editSw.click()"
   >
   <button
     class="delete-btn"
