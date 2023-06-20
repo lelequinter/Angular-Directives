@@ -15,6 +15,12 @@
     <div class="dropdown-content">
       <div
         class="dropdown-item"
+        *ngIf="!leaderLineArray.length"
+      >
+        No existen líneas aún!
+      </div>
+      <div
+        class="dropdown-item"
         *ngFor="let line of leaderLineArray; index as i"
       >
         Linea {{ line.line._id }}
