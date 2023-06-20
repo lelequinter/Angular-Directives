@@ -1,5 +1,6 @@
 import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { IElements } from './models/line-elements-model';
+import { Chance } from "chance";
 
 @Component({
   selector: 'app-leader-line',
@@ -200,6 +201,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   }
 
   droppedToCreate(event: any){
+    const guid = new Chance().guid();
     const { x, y } = event.dropPoint;
 
     if(event.event.target.className == 'wrapper' ){
@@ -210,7 +212,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       const boxWidth = 100;
 
       this.elementsArray.push({
-          id: this.elementsArray.length + 1,
+          id: guid,
           value: `box${this.elementsArray.length + 1}`,
           coords: {
               x: Number(x) - ( boxWidth / 2 ),
@@ -231,18 +233,21 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
-  idToDelete: number | null = null;
+  idToDelete: string | null = null;
 
-  deleteElement(id: number | null){
+  deleteElement(id: string | null){
     if(id !== null) {
       const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
       this.elementsArray.splice(deleteIndex, 1);
+      this.verifyLines(id);
     }
 
     this.idToDelete = null;
   }
 
-  verifyLines(index: number){
+  verifyLines(id: string){
+    console.log(id);
+
     // this.leaderLineArray.forEach((line: any, i: number) => {
     //   const lineDepends = line.startElement.includes(`box${index}`) || line.endElement.includes(`box${index}`);
 

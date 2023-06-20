@@ -1,5 +1,5 @@
 export interface IElements {
-  id: number;
+  id: string;
   properties?: IElementProperties;
   value: string;
   coords: IElementCoords
