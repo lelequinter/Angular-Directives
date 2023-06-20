@@ -257,13 +257,10 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
 
     if(!dependentLines.length){
-      //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
-      const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
-      this.elementsArray.splice(deleteIndex, 1);
+      this.deleteElement(id);
 
-      this.idToDelete = null;
+      this.closeDialog();
     }
-
   }
 
   closeDialog(){
@@ -279,7 +276,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       this.verifyLines(id);
     }
 
-    this.idToDelete = null;
+    this.closeDialog();
   }
 
   verifyLines(id: string){
