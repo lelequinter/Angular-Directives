@@ -37,7 +37,7 @@
   <button
     class="delete-btn"
     [ngClass]="editSw.checked ? 'show' : ''"
-    (click)="deleteElement(i)"
+    (click)="deleteDialog.showModal(); indexToDelete = i"
   >❌</button>
   <input
     #editSw
@@ -49,3 +49,12 @@
   >
   </div>
 </div>
+
+<dialog #deleteDialog id="deleteDialog">
+  <h1><div>❗</div></h1>
+  <p>Deseas eliminar este elemento?</p>
+  <div style="display: flex; gap: 10px; justify-content: center;" >
+    <button (click)="deleteDialog.close()">Cancel</button>
+    <button (click)="deleteElement(indexToDelete); deleteDialog.close()">Confirm</button>
+  </div>
+</dialog>

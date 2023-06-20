@@ -227,8 +227,11 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
-  deleteElement(index: number){
-    this.elementsArray.splice(index, 1);
+  indexToDelete: number | null = null;
+
+  deleteElement(index: number | null){
+    if(index !== null) this.elementsArray.splice(index, 1);
+    this.indexToDelete = null;
   }
 
   ngOnDestroy(): void {
