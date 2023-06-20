@@ -319,6 +319,13 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     })
   }
 
+  deleteLine(line: any){
+    line.line.remove();
+    //* Encontrando, por medio del id de la linea, el indice de la linea para eliminarlo del arreglo
+    const lineIndex = this.leaderLineArray.findIndex((element: any) => element.line._id === line.line._id);
+    this.leaderLineArray.splice(lineIndex, 1);
+  }
+
   ngOnDestroy(): void {
     //* Removiendo las lineas cuando cambie de vista
     this.leaderLineArray.forEach((linea: any) => {

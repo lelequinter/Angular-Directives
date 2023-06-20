@@ -15,13 +15,13 @@
     <div class="dropdown-content">
       <div
         class="dropdown-item"
-        *ngFor="let item of leaderLineArray; index as i"
+        *ngFor="let line of leaderLineArray; index as i"
       >
         Linea {{ i + 1 }}
         <button
           class="dropdown-delete-btn"
+          (click)="deleteLine(line)"
         >❌</button>
-          <!-- (click)="verifyElemet(element.id)" -->
       </div>
     </div>
   </div>
