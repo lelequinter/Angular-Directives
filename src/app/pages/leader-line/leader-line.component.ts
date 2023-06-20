@@ -60,10 +60,14 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     //* Si me estoy moviendo y drag == true, es que estoy arrastrando algo
     //* Tambien valido que existan lineas para repintar
     if (this.drag && Boolean(this.leaderLineArray.length)) {
-      this.leaderLineArray.forEach((linea) => {
-        linea.line?.position();
-      });
+      this.reDrawLines();
     }
+  }
+
+  reDrawLines(){
+    this.leaderLineArray.forEach((linea) => {
+      linea.line?.position();
+    });
   }
 
   @HostListener('dblclick', ['$event'])
