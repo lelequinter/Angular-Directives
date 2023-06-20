@@ -231,11 +231,29 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     }
   }
 
-  indexToDelete: number | null = null;
+  idToDelete: number | null = null;
 
-  deleteElement(index: number | null){
-    if(index !== null) this.elementsArray.splice(index, 1);
-    this.indexToDelete = null;
+  deleteElement(id: number | null){
+    if(id !== null) {
+      const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
+      this.elementsArray.splice(deleteIndex, 1);
+    }
+
+    this.idToDelete = null;
+  }
+
+  verifyLines(index: number){
+    // this.leaderLineArray.forEach((line: any, i: number) => {
+    //   const lineDepends = line.startElement.includes(`box${index}`) || line.endElement.includes(`box${index}`);
+
+    //   if(lineDepends) {
+    //     this.leaderLineArray[i].line.remove();
+    //     this.leaderLineArray.splice(i, 1);
+    //     this.reDrawLines();
+    //   };
+    // })
+
+    // this.elementsArray.splice(index, 1);
   }
 
   ngOnDestroy(): void {

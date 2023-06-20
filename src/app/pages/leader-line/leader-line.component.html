@@ -2,8 +2,6 @@
   cdkDropList
   class="dashboard"
   >
-  <!-- cdkDropListConnectedTo="drop-wrapper" -->
-  <!-- (cdkDropListDropped)="itemDropped($event)" -->
   <div
     cdkDrag
     class="draggable-rect"
@@ -12,9 +10,9 @@
   >
     box#
   </div>
+  <button (click)="verifyLines(2)">lines</button>
 </div>
 
-<!-- (cdkDropListDropped)="itemDropped($event)" -->
 <div
   class="wrapper"
   cdkDropListSortingDisabled="true"
@@ -37,7 +35,7 @@
   <button
     class="delete-btn"
     [ngClass]="editSw.checked ? 'show' : ''"
-    (click)="deleteDialog.showModal(); indexToDelete = i"
+    (click)="deleteDialog.showModal(); idToDelete = element.id"
   >❌</button>
   <input
     #editSw
@@ -54,7 +52,7 @@
   <h1><div>❗</div></h1>
   <p>Deseas eliminar este elemento?</p>
   <div style="display: flex; gap: 10px; justify-content: center;" >
-    <button (click)="deleteDialog.close(); indexToDelete = null">Cancel</button>
-    <button (click)="deleteElement(indexToDelete); deleteDialog.close()">Confirm</button>
+    <button (click)="deleteDialog.close(); idToDelete = null">Cancel</button>
+    <button (click)="deleteElement(idToDelete); deleteDialog.close()">Confirm</button>
   </div>
 </dialog>
