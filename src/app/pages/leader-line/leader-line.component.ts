@@ -1,6 +1,7 @@
 import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { IElements } from './models/line-elements-model';
 import { Chance } from "chance";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-leader-line',
@@ -237,6 +238,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   deleteElement(id: string | null){
     if(id !== null) {
+      //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
       const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
       this.elementsArray.splice(deleteIndex, 1);
       this.verifyLines(id);
@@ -246,19 +248,31 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   }
 
   verifyLines(id: string){
-    console.log(id);
+    //* Capturando el arreglo de lineas dependientes de un elmento eliminado
+    const dependentLines = this.leaderLineArray.filter((line: any, i: number) => {
+      const lineDepends = line.startElement.includes(`box${id}`) || line.endElement.includes(`box${id}`);
 
-    // this.leaderLineArray.forEach((line: any, i: number) => {
-    //   const lineDepends = line.startElement.includes(`box${index}`) || line.endElement.includes(`box${index}`);
+      if(lineDepends) {
+        return true;
+      };
+      return false;
+    });
 
-    //   if(lineDepends) {
-    //     this.leaderLineArray[i].line.remove();
-    //     this.leaderLineArray.splice(i, 1);
-    //     this.reDrawLines();
-    //   };
-    // })
+    //* Ejecutando el metodo remove de los elementos capturados para borrar la linea
+    dependentLines.forEach((item: any) => {
+      if(!_.isEmpty(item)){
+        item?.line?.remove();
+      }
+    })
 
-    // this.elementsArray.splice(index, 1);
+    //* Eliminando la linea del arreglo de lineas
+    dependentLines.forEach((item: any) => {
+      if(!_.isEmpty(item)){
+        //* Encontrando, por medio del id de la linea, el indice de la linea para eliminarlo del arreglo
+        const lineIndex = this.leaderLineArray.findIndex((element: any) => element.line._id === item.line._id);
+        this.leaderLineArray.splice(lineIndex, 1);
+      }
+    })
   }
 
   ngOnDestroy(): void {
