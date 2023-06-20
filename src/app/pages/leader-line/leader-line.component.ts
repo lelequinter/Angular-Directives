@@ -115,19 +115,19 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
         dash: { animation: true },
         startPlug: 'disc',
         endPlug: 'triangle',
-        middleLabel: leaderLine.captionLabel(
-          `${this.leaderLineArray.length + 1}`,
-          {
-            color: 'blue',
-            offset: [-30, -30],
-            fontWeight: 600,
-            fontSize: '20px',
-          }
-        ),
       }
     );
 
-    // line.e
+    line.middleLabel = leaderLine.captionLabel(
+      `${line._id}`,
+      {
+        color: 'blue',
+        offset: [-30, -30],
+        fontWeight: 600,
+        fontSize: '20px',
+      }
+    ),
+
 
     //* Metodo para dibujar la linea con aminacion de dibujo
     line.show('draw', { duration: 300, timing: 'ease-in-out' });

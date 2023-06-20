@@ -17,7 +17,7 @@
         class="dropdown-item"
         *ngFor="let line of leaderLineArray; index as i"
       >
-        Linea {{ i + 1 }}
+        Linea {{ line.line._id }}
         <button
           class="dropdown-delete-btn"
           (click)="deleteLine(line)"
