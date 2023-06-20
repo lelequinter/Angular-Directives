@@ -54,7 +54,7 @@
   <h1><div>❗</div></h1>
   <p>Deseas eliminar este elemento?</p>
   <div style="display: flex; gap: 10px; justify-content: center;" >
-    <button (click)="deleteDialog.close()">Cancel</button>
+    <button (click)="deleteDialog.close(); indexToDelete = null">Cancel</button>
     <button (click)="deleteElement(indexToDelete); deleteDialog.close()">Confirm</button>
   </div>
 </dialog>
