@@ -55,7 +55,7 @@
     Deseas eliminarlo?
   </p>
   <div style="display: flex; gap: 10px; justify-content: center;" >
-    <button (click)="deleteDialog.close(); idToDelete = null">Cancel</button>
+    <button (click)="closeDialog()">Cancel</button>
     <button (click)="deleteElement(idToDelete); deleteDialog.close()">Confirm</button>
   </div>
 </dialog>

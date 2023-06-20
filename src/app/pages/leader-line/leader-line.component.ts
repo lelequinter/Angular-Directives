@@ -266,6 +266,11 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   }
 
+  closeDialog(){
+    this.deleteDialog.nativeElement.close();
+    this.idToDelete = null;
+  }
+
   deleteElement(id: string | null){
     if(id !== null) {
       //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
