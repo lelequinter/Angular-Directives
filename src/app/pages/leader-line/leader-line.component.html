@@ -35,7 +35,7 @@
   <button
     class="delete-btn"
     [ngClass]="editSw.checked ? 'show' : ''"
-    (click)="deleteDialog.showModal(); idToDelete = element.id"
+    (click)="verifyElemet(element.id)"
   >❌</button>
   <input
     #editSw
@@ -50,7 +50,10 @@
 
 <dialog #deleteDialog id="deleteDialog">
   <h1><div>❗</div></h1>
-  <p>Deseas eliminar este elemento?</p>
+  <p style="text-align: center;">
+    Este elemento tiene líneas asignadas. <br>
+    Deseas eliminarlo?
+  </p>
   <div style="display: flex; gap: 10px; justify-content: center;" >
     <button (click)="deleteDialog.close(); idToDelete = null">Cancel</button>
     <button (click)="deleteElement(idToDelete); deleteDialog.close()">Confirm</button>

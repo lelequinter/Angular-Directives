@@ -1,4 +1,4 @@
-import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, HostListener, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { IElements } from './models/line-elements-model';
 import { Chance } from "chance";
 import * as _ from 'lodash';
@@ -9,6 +9,9 @@ import * as _ from 'lodash';
   styleUrls: ['./leader-line.component.css'],
 })
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
+
+  @ViewChild('deleteDialog') deleteDialog!: ElementRef;
+
   //* Arreglo de elementos en pantalla
   elementsArray: IElements[] = [
     // {
@@ -236,6 +239,33 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   idToDelete: string | null = null;
 
+  verifyElemet(id: string){
+    this.idToDelete = id;
+
+    //* Capturando el arreglo de lineas dependientes de un elmento eliminado
+    const dependentLines = this.leaderLineArray.filter((line: any) => {
+      const lineDepends = line.startElement.includes(`box${id}`) || line.endElement.includes(`box${id}`);
+
+      if(lineDepends) {
+        return true;
+      };
+      return false;
+    });
+
+    if(dependentLines.length){
+      this.deleteDialog.nativeElement.showModal();
+    }
+
+    if(!dependentLines.length){
+      //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
+      const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
+      this.elementsArray.splice(deleteIndex, 1);
+
+      this.idToDelete = null;
+    }
+
+  }
+
   deleteElement(id: string | null){
     if(id !== null) {
       //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
@@ -249,7 +279,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   verifyLines(id: string){
     //* Capturando el arreglo de lineas dependientes de un elmento eliminado
-    const dependentLines = this.leaderLineArray.filter((line: any, i: number) => {
+    const dependentLines = this.leaderLineArray.filter((line: any) => {
       const lineDepends = line.startElement.includes(`box${id}`) || line.endElement.includes(`box${id}`);
 
       if(lineDepends) {
