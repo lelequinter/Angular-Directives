@@ -273,13 +273,13 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       //* Encontrando, por medio del id, el indice del elemento para eliminarlo del arreglo
       const deleteIndex = this.elementsArray.findIndex((element: IElements) => element.id === id);
       this.elementsArray.splice(deleteIndex, 1);
-      this.verifyLines(id);
+      this.verifyToDeleteLines(id);
     }
 
     this.closeDialog();
   }
 
-  verifyLines(id: string){
+  verifyToDeleteLines(id: string){
     //* Capturando el arreglo de lineas dependientes de un elmento eliminado
     const dependentLines = this.leaderLineArray.filter((line: any) => {
       const lineDepends = line.startElement.includes(`box${id}`) || line.endElement.includes(`box${id}`);
