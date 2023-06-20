@@ -115,6 +115,15 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
         dash: { animation: true },
         startPlug: 'disc',
         endPlug: 'triangle',
+        middleLabel: leaderLine.captionLabel(
+          `${this.leaderLineArray.length + 1}`,
+          {
+            color: 'blue',
+            offset: [-30, -30],
+            fontWeight: 600,
+            fontSize: '20px',
+          }
+        ),
       }
     );
 
