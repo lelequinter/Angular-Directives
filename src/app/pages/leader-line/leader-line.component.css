@@ -99,6 +99,23 @@
     }
 }
 
+.dropdown-delete-btn{
+  appearance: none;
+  position: absolute;
+  right: 10px;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 23px;
+  padding: 3px;
+  background-color: red;
+}
+
+.dropdown-delete-btn:active{
+  background-color: rgb(255, 70, 70);
+}
+
+
 .draggable-rect{
   height: auto;
   background-color: rgb(68, 145, 196);

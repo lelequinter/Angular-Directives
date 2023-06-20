@@ -10,15 +10,19 @@
   >
     box#
   </div>
-  <!-- <select class="select-lines">
-    <option *ngFor="let item of leaderLineArray; index as i">
-      Linea {{ i + 1 }}
-    </option>
-  </select> -->
   <div class="dropdown">
     <h3 >Líneas &nbsp; <div style="transform: rotateZ(90deg);" >▶</div></h3>
     <div class="dropdown-content">
-      <div class="dropdown-item" *ngFor="let item of leaderLineArray; index as i" >Linea {{ i + 1 }}</div>
+      <div
+        class="dropdown-item"
+        *ngFor="let item of leaderLineArray; index as i"
+      >
+        Linea {{ i + 1 }}
+        <button
+          class="dropdown-delete-btn"
+        >❌</button>
+          <!-- (click)="verifyElemet(element.id)" -->
+      </div>
     </div>
   </div>
 </div>

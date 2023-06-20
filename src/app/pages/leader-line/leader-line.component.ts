@@ -127,6 +127,11 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
       }
     );
 
+    // line.e
+
+    //* Metodo para dibujar la linea con aminacion de dibujo
+    line.show('draw', { duration: 300, timing: 'ease-in-out' });
+
     //* Guardando el espacio en memoria de cada linea creada para
     //* luego acceder a ellas y llamar los metodos de cada una
     this.leaderLineArray.push({
@@ -135,8 +140,6 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     endElement: this.elementsToMatch[1].id,
     });
 
-    //* Metodo para dibujar la linea con aminacion de dibujo
-    line.show('draw', { duration: 300, timing: 'ease-in-out' });
 
     //* Limpiando el array de elementos a unir
     this.elementsToMatch = [];
