@@ -48,6 +48,55 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.select-lines{
+  position: absolute;
+  top: calc(50% - 10px );
+  right: 30px;
+}
+
+.dropdown{
+  position: absolute;
+  /* top: calc(50% ); */
+  left: 30px;
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75);
+}
+
+.dropdown h3{
+  display: flex;
+  margin: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(73, 73, 73, 0.2), 0px 0px 0px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 8px 16px 0px rgba(73, 73, 73, 0.2), 0px 0px 0px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 8px 16px 0px rgba(73, 73, 73, 0.2), 0px 0px 0px 1px rgba(0,0,0,0.75);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content .dropdown-item{
+  padding: 16px;
+
+    &:hover{
+      background-color: rgba(0, 0, 0, 0.079);
+    }
 }
 
 .draggable-rect{

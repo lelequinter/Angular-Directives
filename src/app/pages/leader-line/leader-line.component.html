@@ -10,7 +10,17 @@
   >
     box#
   </div>
-  <!-- <button (click)="verifyLines(2)">lines</button> -->
+  <!-- <select class="select-lines">
+    <option *ngFor="let item of leaderLineArray; index as i">
+      Linea {{ i + 1 }}
+    </option>
+  </select> -->
+  <div class="dropdown">
+    <h3 >Líneas &nbsp; <div style="transform: rotateZ(90deg);" >▶</div></h3>
+    <div class="dropdown-content">
+      <div class="dropdown-item" *ngFor="let item of leaderLineArray; index as i" >Linea {{ i + 1 }}</div>
+    </div>
+  </div>
 </div>
 
 <div
