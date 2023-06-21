@@ -25,6 +25,10 @@
       >
         Linea {{ line.line._id }}
         <button
+          class="dropdown-edit-btn"
+          (click)="openEditLineDialog(line)"
+        >📝</button>
+        <button
           class="dropdown-delete-btn"
           (click)="deleteLine(line)"
         >❌</button>
@@ -78,5 +82,18 @@
   <div style="display: flex; gap: 10px; justify-content: center;" >
     <button (click)="closeDialog()">Cancelar</button>
     <button (click)="deleteElement(idToDelete)">Aceptar</button>
+  </div>
+</dialog>
+
+<dialog #editLineDialog id="editLineDialog">
+  <h1><div>📝</div></h1>
+  <p style="text-align: center;">
+    Editar Línea
+  </p>
+  <p>Line label:</p>
+  <input style="margin-bottom: 20px;" #editLineLabel type="text">
+  <div style="display: flex; gap: 10px; justify-content: center;" >
+    <button (click)="closeEditLineDialog()">Cancelar</button>
+    <button (click)="editLine(editLineLabel.value)">Guardar</button>
   </div>
 </dialog>

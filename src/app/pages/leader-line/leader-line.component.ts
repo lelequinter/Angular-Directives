@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   @ViewChild('deleteDialog') deleteDialog!: ElementRef;
+  @ViewChild('editLineDialog') editLineDialog!: ElementRef;
 
   //* Arreglo de elementos en pantalla
   elementsArray: IElements[] = [
@@ -126,7 +127,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
         fontWeight: 600,
         fontSize: '20px',
       }
-    ),
+    );
 
 
     //* Metodo para dibujar la linea con aminacion de dibujo
@@ -324,6 +325,40 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     //* Encontrando, por medio del id de la linea, el indice de la linea para eliminarlo del arreglo
     const lineIndex = this.leaderLineArray.findIndex((element: any) => element.line._id === line.line._id);
     this.leaderLineArray.splice(lineIndex, 1);
+  }
+
+  lineToEdit: any = null;
+
+  openEditLineDialog(line: any){
+    this.lineToEdit = line.line;
+    console.log(this.lineToEdit);
+
+    this.editLineDialog.nativeElement.showModal();
+  }
+
+  editLine(newLabel: string){
+    //* Obteniendo la librería
+    const leaderLine = (window as any).LeaderLine;
+    // console.log(newLabel);
+
+    if(this.lineToEdit !== null){
+      this.lineToEdit.middleLabel = leaderLine.captionLabel(
+        `${newLabel}`,
+        {
+          color: 'blue',
+          offset: [-30, -30],
+          fontWeight: 600,
+          fontSize: '20px',
+        }
+      );
+    }
+
+    this.closeEditLineDialog();
+  }
+
+  closeEditLineDialog(){
+    this.editLineDialog.nativeElement.close();
+    this.lineToEdit = null;
   }
 
   ngOnDestroy(): void {
