@@ -23,7 +23,7 @@
         class="dropdown-item"
         *ngFor="let line of leaderLineArray; index as i"
       >
-        Linea {{ line.line._id }}
+        {{ line.line.middelLabelText }}
         <button
           class="dropdown-edit-btn"
           (click)="openEditLineDialog(line)"
@@ -91,9 +91,9 @@
     Editar Línea
   </p>
   <p>Line label:</p>
-  <input style="margin-bottom: 20px;" #editLineLabel type="text">
+  <input #editLineLabelInput style="margin-bottom: 20px;" type="text">
   <div style="display: flex; gap: 10px; justify-content: center;" >
     <button (click)="closeEditLineDialog()">Cancelar</button>
-    <button (click)="editLine(editLineLabel.value)">Guardar</button>
+    <button (click)="editLine(editLineLabelInput.value)">Guardar</button>
   </div>
 </dialog>

@@ -11,7 +11,9 @@ import * as _ from 'lodash';
 export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   @ViewChild('deleteDialog') deleteDialog!: ElementRef;
+
   @ViewChild('editLineDialog') editLineDialog!: ElementRef;
+  @ViewChild('editLineLabelInput') editLineLabelInput!: ElementRef;
 
   //* Arreglo de elementos en pantalla
   elementsArray: IElements[] = [
@@ -120,7 +122,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
     );
 
     line.middleLabel = leaderLine.captionLabel(
-      `${line._id}`,
+      `Línea ${line._id}`,
       {
         color: 'blue',
         offset: [-30, -30],
@@ -128,6 +130,8 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
         fontSize: '20px',
       }
     );
+
+    line.middelLabelText = `Línea ${line._id}`;
 
 
     //* Metodo para dibujar la linea con aminacion de dibujo
@@ -331,7 +335,7 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
 
   openEditLineDialog(line: any){
     this.lineToEdit = line.line;
-    console.log(this.lineToEdit);
+    this.editLineLabelInput.nativeElement.value = line.line.middelLabelText;
 
     this.editLineDialog.nativeElement.showModal();
   }
@@ -339,11 +343,12 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
   editLine(newLabel: string){
     //* Obteniendo la librería
     const leaderLine = (window as any).LeaderLine;
-    // console.log(newLabel);
+    const cleanNewLabel = newLabel.replace(/\s+/g, ' ').trim();
 
+    //* Cambiando el texto de la label por el de la input
     if(this.lineToEdit !== null){
       this.lineToEdit.middleLabel = leaderLine.captionLabel(
-        `${newLabel}`,
+        `${cleanNewLabel}`,
         {
           color: 'blue',
           offset: [-30, -30],
@@ -351,14 +356,17 @@ export class LeaderLineComponent implements AfterViewInit ,OnDestroy {
           fontSize: '20px',
         }
       );
+
+      this.lineToEdit.middelLabelText = `${cleanNewLabel}`;
     }
 
     this.closeEditLineDialog();
   }
 
   closeEditLineDialog(){
-    this.editLineDialog.nativeElement.close();
     this.lineToEdit = null;
+    this.editLineDialog.nativeElement.close();
+    this.editLineLabelInput.nativeElement.value = '';
   }
 
   ngOnDestroy(): void {
