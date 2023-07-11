@@ -23,6 +23,10 @@ export class ExpandibleViewComponent implements OnDestroy {
     this.carsExpandible.deleteItem(index)
   }
 
+  close(){
+    this.carsExpandible.expandableAnimation(false,'Carros');
+  }
+
   pushAnimal() {
     this.animalsExpandible.callMe();
     this.animalsExpandible.pushMethod({nombre: 'Lobo', color: 'Gris', edad: '5 años', habitat: 'Planicies, desiertos, tundras, taigas y bosques.'})

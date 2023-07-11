@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col">
-    <h2>Expandible: carsList$</h2> <button (click)="pushCar()">Push carsList$</button>
+    <h2>Expandible: carsList$</h2> <button (click)="pushCar()">Push carsList$</button> <button (click)="close()">close</button>
     <app-expandible #carsExpandible [array$]="carsList$" contentName="Carros">
       <ng-template let-implicit>
         <app-car-card
